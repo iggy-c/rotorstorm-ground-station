@@ -1,0 +1,11 @@
+C:\Users\bcus9\Documents\GitHub\rotorstorm-ground-station\hello_world\target\debug\deps\libbase64-5d977a46ad436e40.rmeta: C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\lib.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\chunked_encoder.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\display.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\line_wrap.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\tables.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\encode.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\decode.rs
+
+C:\Users\bcus9\Documents\GitHub\rotorstorm-ground-station\hello_world\target\debug\deps\base64-5d977a46ad436e40.d: C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\lib.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\chunked_encoder.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\display.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\line_wrap.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\tables.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\encode.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\decode.rs
+
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\lib.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\chunked_encoder.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\display.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\line_wrap.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\tables.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\encode.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\base64-0.9.3\src\decode.rs:

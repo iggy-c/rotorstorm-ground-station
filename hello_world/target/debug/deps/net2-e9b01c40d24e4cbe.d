@@ -1,0 +1,12 @@
+C:\Users\bcus9\Documents\GitHub\rotorstorm-ground-station\hello_world\target\debug\deps\libnet2-e9b01c40d24e4cbe.rmeta: C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\lib.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\tcp.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\udp.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\socket.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\ext.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\utils.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\sys\windows\mod.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\sys\windows\impls.rs
+
+C:\Users\bcus9\Documents\GitHub\rotorstorm-ground-station\hello_world\target\debug\deps\net2-e9b01c40d24e4cbe.d: C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\lib.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\tcp.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\udp.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\socket.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\ext.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\utils.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\sys\windows\mod.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\sys\windows\impls.rs
+
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\lib.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\tcp.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\udp.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\socket.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\ext.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\utils.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\sys\windows\mod.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\net2-0.2.39\src\sys\windows\impls.rs:
