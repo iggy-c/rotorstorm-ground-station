@@ -8,24 +8,51 @@
 //         println!("{}", p.port_name);
 //     }
 // }
+// use std::net::TcpListener;
+// use std::thread::spawn;
+// use tungstenite::accept;
+
+
 use std::net::TcpListener;
-use std::thread::spawn;
-use tungstenite::accept;
+use tungstenite::server::accept;
 
-/// A WebSocket echo server
-fn main () {
-    let server = TcpListener::bind("127.0.0.1:9001").unwrap();
+fn main() {
+    // Bind the server to a specific address and port
+    let server = TcpListener::bind("127.0.0.1:9001").expect("Failed to bind server");
+
+    println!("WebSocket server running on ws://127.0.0.1:9001");
+
     for stream in server.incoming() {
-        spawn (move || {
-            let mut websocket = accept(stream.unwrap()).unwrap();
-            loop {
-                let msg = websocket.read().unwrap();
+        match stream {
+            Ok(stream) => {
+                // Spawn a thread to handle each connection
+                std::thread::spawn(move || {
+                    let mut websocket = accept(stream).expect("Failed to accept connection");
 
-                // We do not want to send back ping/pong messages.
-                if msg.is_binary() || msg.is_text() {
-                    websocket.send(msg).unwrap();
-                }
+                    println!("New WebSocket connection established!");
+
+                    loop {
+                        match websocket.read_message() {
+                            Ok(msg) => {
+                                // Print the received message
+                                println!("Received: {}", msg);
+
+                                // Echo the message back to the client
+                                if msg.is_text() || msg.is_binary() {
+                                    websocket.write_message(msg).expect("Failed to send message");
+                                }
+                            }
+                            Err(e) => {
+                                println!("Error: {}", e);
+                                break;
+                            }
+                        }
+                    }
+                });
             }
-        });
+            Err(e) => {
+                println!("Connection failed: {}", e);
+            }
+        }
     }
 }
