@@ -1,20 +1,5 @@
-// fn main() {
-//     println!("searching");
-//     let ports = serialport::available_ports().expect("No ports found!");
-//     if ports.is_empty() {
-//         println!("No serial ports found.");
-//     }
-//     for p in ports {
-//         println!("{}", p.port_name);
-//     }
-// }
-// use std::net::TcpListener;
-// use std::thread::spawn;
-// use tungstenite::accept;
-
-
 use std::net::TcpListener;
-use tungstenite::server::accept;
+use tungstenite::accept; // Use `accept` from the public module
 
 fn main() {
     // Bind the server to a specific address and port
@@ -32,14 +17,14 @@ fn main() {
                     println!("New WebSocket connection established!");
 
                     loop {
-                        match websocket.read_message() {
+                        match websocket.read() {
                             Ok(msg) => {
                                 // Print the received message
                                 println!("Received: {}", msg);
 
                                 // Echo the message back to the client
                                 if msg.is_text() || msg.is_binary() {
-                                    websocket.write_message(msg).expect("Failed to send message");
+                                    websocket.send(msg).expect("Failed to send message");
                                 }
                             }
                             Err(e) => {

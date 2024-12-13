@@ -1,40 +1,75 @@
-<!doctype html>
-<h2>WebSocket Test</h2>
-<p>Sends a ping every five seconds</p>
-<div id="output"></div>
-<script>
-  const wsUri = "ws://127.0.0.1/";
-  const output = document.querySelector("#output");
-  const websocket = new WebSocket(wsUri);
-  let pingInterval;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebSocket Client</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    #log { border: 1px solid #ccc; padding: 10px; height: 200px; overflow-y: scroll; }
+    input, button { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>WebSocket Client</h1>
+  <div>
+    <label for="ws-url">WebSocket URL:</label>
+    <input id="ws-url" type="text" value="ws://localhost:9001">
+    <button id="connect-btn">Connect</button>
+  </div>
+  <div id="log"></div>
+  <div>
+    <input id="message" type="text" placeholder="Message to send">
+    <button id="send-btn" disabled>Send</button>
+  </div>
+  <script>
+    let socket;
+    const logDiv = document.getElementById('log');
 
-  function writeToScreen(message) {
-    output.insertAdjacentHTML("afterbegin", `<p>${message}</p>`);
-  }
+    // Add a log message
+    function logMessage(message) {
+      const p = document.createElement('p');
+      p.textContent = message;
+      logDiv.appendChild(p);
+      logDiv.scrollTop = logDiv.scrollHeight; // Auto-scroll
+    }
 
-  function sendMessage(message) {
-    writeToScreen(`SENT: ${message}`);
-    websocket.send(message);
-  }
+    // Connect to WebSocket
+    document.getElementById('connect-btn').addEventListener('click', () => {
+      const url = document.getElementById('ws-url').value;
 
-  websocket.onopen = (e) => {
-    writeToScreen("CONNECTED");
-    sendMessage("ping");
-    pingInterval = setInterval(() => {
-      sendMessage("ping");
-    }, 5000);
-  };
+      socket = new WebSocket(url);
 
-  websocket.onclose = (e) => {
-    writeToScreen("DISCONNECTED");
-    clearInterval(pingInterval);
-  };
+      socket.addEventListener('open', () => {
+        logMessage('Connected to WebSocket server');
+        document.getElementById('send-btn').disabled = false;
+      });
 
-  websocket.onmessage = (e) => {
-    writeToScreen(`RECEIVED: ${e.data}`);
-  };
+      socket.addEventListener('message', (event) => {
+        logMessage(`Received: ${event.data}`);
+      });
 
-  websocket.onerror = (e) => {
-    writeToScreen(`ERROR: ${e.data}`);
-  };
-</script>
+      socket.addEventListener('close', () => {
+        logMessage('Disconnected from WebSocket server');
+        document.getElementById('send-btn').disabled = true;
+      });
+
+      socket.addEventListener('error', (error) => {
+        logMessage(`Error: ${error.message}`);
+      });
+    });
+
+    // Send a message to the WebSocket server
+    document.getElementById('send-btn').addEventListener('click', () => {
+      const message = document.getElementById('message').value;
+      if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send(message);
+        logMessage(`Sent: ${message}`);
+        document.getElementById('message').value = '';
+      } else {
+        logMessage('WebSocket is not connected');
+      }
+    });
+  </script>
+</body>
+</html>
