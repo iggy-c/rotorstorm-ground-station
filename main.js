@@ -1,27 +1,47 @@
-Deno.serve({
-    port: 80,
-    handler: async (request) => {
-      // If the request is a websocket upgrade,
-      // we need to use the Deno.upgradeWebSocket helper
-      if (request.headers.get("upgrade") === "websocket") {
-        const { socket, response } = Deno.upgradeWebSocket(request);
-  
-        socket.onopen = () => {
-          console.log("CONNECTED");
-        };
-        socket.onmessage = (event) => {
-          console.log(`RECEIVED: ${event.data}`);
-          socket.send("pong");
-        };
-        socket.onclose = () => console.log("DISCONNECTED");
-        socket.onerror = (error) => console.error("ERROR:", error);
-  
-        return response;
-      } else {
-        // If the request is a normal HTTP request,
-        // we serve the client HTML file.
-        const file = await Deno.open("./index.html", { read: true });
-        return new Response(file.readable);
-      }
-    },
-  });
+let socket;
+const logDiv = document.getElementById('log');
+
+// Add a log message
+function logMessage(message) {
+    const p = document.createElement('p');
+    p.textContent = message;
+    logDiv.appendChild(p);
+    logDiv.scrollTop = logDiv.scrollHeight; // Auto-scroll
+}
+
+// Connect to WebSocket
+document.getElementById('connect-btn').addEventListener('click', () => {
+    const url = document.getElementById('ws-url').value;
+
+    socket = new WebSocket(url);
+
+    socket.addEventListener('open', () => {
+    logMessage('Connected to WebSocket server');
+    document.getElementById('send-btn').disabled = false;
+    });
+
+    socket.addEventListener('message', (event) => {
+    logMessage(`Received: ${event.data}`);
+    });
+
+    socket.addEventListener('close', () => {
+    logMessage('Disconnected from WebSocket server');
+    document.getElementById('send-btn').disabled = true;
+    });
+
+    socket.addEventListener('error', (error) => {
+    logMessage(`Error: ${error.message}`);
+    });
+});
+
+// Send a message to the WebSocket server
+document.getElementById('send-btn').addEventListener('click', () => {
+    const message = document.getElementById('message').value;
+    if (socket && socket.readyState === WebSocket.OPEN) {
+    socket.send(message);
+    logMessage(`Sent: ${message}`);
+    document.getElementById('message').value = '';
+    } else {
+    logMessage('WebSocket is not connected');
+    }
+});
