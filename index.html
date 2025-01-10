@@ -4,24 +4,91 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WebSocket Client</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; }
     #log { border: 1px solid #ccc; padding: 10px; height: 200px; overflow-y: scroll; }
     input, button { margin-top: 10px; }
+    #myChart {
+        max-width: 600px;
+        max-height: 300px;
+        width: 100%; /* Optional for responsive design */
+        height: auto; /* Adjust height based on aspect ratio */
+    }
+
   </style>
 </head>
 <body>
+
+  <!-- Top Bar -->
+  <div class="row"></div>
   <h1>WebSocket Client</h1>
-  <div>
-    <label for="ws-url">WebSocket URL:</label>
-    <input id="ws-url" type="text" value="ws://127.0.0.1:9001">
-    <button id="connect-btn">Connect</button>
-  </div>
-  <div id="log"></div>
-  <div>
-    <input id="message" type="text" placeholder="Message to send">
-    <button id="send-btn" disabled>Send</button>
-  </div>
+
+
+  <div class="row">
+    <div class="col-sm-2">
+      
+      <!-- Sidebar -->
+
+      <!-- TEAM_ID, MISSION_TIME, PACKET_COUNT, MODE, STATE, ALTITUDE,
+      TEMPERATURE, PRESSURE, VOLTAGE, GYRO_R, GYRO_P, GYRO_Y, ACCEL_R,
+      ACCEL_P, ACCEL_Y, MAG_R, MAG_P, MAG_Y, AUTO_GYRO_ROTATION_RATE,
+      GPS_TIME, GPS_ALTITUDE, GPS_LATITUDE, GPS_LONGITUDE, GPS_SATS,
+      CMD_ECHO -->
+
+      <div id="element1" data-label="1">TEAM ID: <span class="dynamic"></span></div>
+      <div id="element2" data-label="2">MISSION TIME: <span class="dynamic"></span></div>
+      <div id="element3" data-label="3">PACKET COUNT: <span class="dynamic"></span></div>
+      <div id="element4" data-label="4">MODE: <span class="dynamic"></span></div>
+      <div id="element5" data-label="5">STATE: <span class="dynamic"></span></div>
+      <div id="element6" data-label="6">ALTITUDE: <span class="dynamic"></span></div>
+      <div id="element7" data-label="7">TEMPERATURE: <span class="dynamic"></span></div>
+      <div id="element8" data-label="8">PRESSURE: <span class="dynamic"></span></div>
+      <div id="element9" data-label="9">VOLTAGE: <span class="dynamic"></span></div>
+      <div id="element10" data-label="10">GYRO_R: <span class="dynamic"></span></div>
+      <div id="element11" data-label="11">GYRO_P: <span class="dynamic"></span></div>
+      <div id="element12" data-label="12">GYRO_Y: <span class="dynamic"></span></div>
+      <div id="element13" data-label="13">ACCEL_R: <span class="dynamic"></span></div>
+      <div id="element14" data-label="14">ACCEL_P: <span class="dynamic"></span></div>
+      <div id="element15" data-label="15">ACCEL_Y: <span class="dynamic"></span></div>
+      <div id="element16" data-label="16">MAG_R: <span class="dynamic"></span></div>
+      <div id="element17" data-label="17">MAG_P: <span class="dynamic"></span></div>
+      <div id="element18" data-label="18">MAG_Y: <span class="dynamic"></span></div>
+      <div id="element19" data-label="19">ROTATION RATE: <span class="dynamic"></span></div>
+      <div id="element20" data-label="20">GPS TIME: <span class="dynamic"></span></div>
+      <div id="element21" data-label="21">GPS ALTITUDE: <span class="dynamic"></span></div>
+      <div id="element22" data-label="22">GPS LATITUDE: <span class="dynamic"></span></div>
+      <div id="element23" data-label="23">GPS LONGITUDE: <span class="dynamic"></span></div>
+      <div id="element24" data-label="24">GPS SATS: <span class="dynamic"></span></div>
+      <div id="element25" data-label="25">ECHO: <span class="dynamic"></span></div>
+      
+
+    </div>
+    
+    <!-- Main Body -->
+    <div class="col-sm-10">
+
+      <canvas id="myChart"></canvas>
+
+      <br></br>
+      <label for="ws-url">WebSocket URL:</label>
+      <input id="ws-url" type="text" value="ws://127.0.0.1:9001">
+      <button id="connect-btn">Connect</button>
+      <div id="log"></div>
+      <!-- <p id="demo"></p> -->
+      <div>
+        <input id="message" type="text" placeholder="Message to send">
+        <button id="send-btn" disabled>Send</button>
+      </div>
+    </div>
+
+
+  </div> 
+
+  
   <script src="main.js"></script> 
 </body>
 </html>
