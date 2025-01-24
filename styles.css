@@ -1,0 +1,103 @@
+/* General reset and body styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full height of viewport */
+    overflow: hidden; /* Prevent body overflow */
+}
+
+/* Sidebar styles */
+.col-sm-2 {
+    padding: 10px !important;
+    background-color: #f4f4f4; 
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto; /* Enable scrolling in the sidebar if content overflows */
+    box-sizing: border-box; 
+    border-right: #a5a5a5 3px solid;
+}
+
+/* Main content area */
+.col-sm-10 {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px;
+    overflow: hidden; /* Prevent content overflow */
+    box-sizing: border-box; /* Prevents overflow due to padding */
+}
+
+/* Tab Navigation */
+/* .nav-tabs {
+    border-bottom: 1px solid #ddd;
+    flex-shrink: 0; /* Prevent shrinking of the tab navigation */
+/* } */
+
+/* Tab content area */
+.tab-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Fill remaining space */
+    overflow: hidden; /* Prevent scrolling within tab content */
+}
+
+/* Graph section - grid for graphs */
+.graph-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    grid-template-rows: 1fr 1fr; /* Two rows */
+    gap: 10px;
+    width: 100%;
+    height: calc(100vh - 100px); /* Make grid take up full height of the container */
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+/* Ensure each graph's container behaves correctly */
+.graph-grid div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the div takes the full height of its grid cell */
+}
+
+/* Canvas styling */
+.graph-grid canvas {
+    width: 100%;
+    height: 100%; /* Canvas fills the full container */
+    max-height: 100%; /* Prevent canvas from growing too tall */
+    display: block; /* Ensure canvas stretches to fit container */
+}
+
+/* Adjust the tab content height so it fits correctly */
+.tab-content {
+    height: calc(100vh - 56px); /* Ensure the content fits within the viewport without overflow */
+    overflow: auto; /* Allow scrolling inside tab content if necessary */
+}
+
+/* Ensure body doesn't overflow horizontally */
+html, body {
+    overflow-x: hidden;
+}
+
+/* .logo-image {
+    /* max-width: 15%;
+    max-height: 50%; */
+    /* display: block; */
+    /* margin: auto; */
+    /* padding-bottom: 30px; */
+/* }  */
+/* 
+.dark-mode {
+    background-color: black;
+    color: white;
+} */
+
+.row {
+    margin: 0;
+    width: 100%;
+}

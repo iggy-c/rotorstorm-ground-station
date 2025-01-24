@@ -56,7 +56,7 @@ document.getElementById('connect-btn').addEventListener('click', () => {
         }
 
         update();
-        updateChart(msgArr[0]);
+        updateChart();
     });
 
     socket.addEventListener('close', () => {
@@ -82,13 +82,13 @@ document.getElementById('send-btn').addEventListener('click', () => {
 });
 
 // Initialize the chart
-const ctx = document.getElementById('myChart').getContext('2d');
-const chart = new Chart(ctx, {
+const ctx_v = document.getElementById('Voltage').getContext('2d');
+const chart_v = new Chart(ctx_v, {
     type: 'line',
     data: {
         labels: [], // X-axis labels (e.g., 0, 1, 2, ...)
         datasets: [{
-            label: 'Dynamic Data',
+            label: 'Volts (V)',
             data: [], // Y-axis data
             borderColor: 'rgba(75, 192, 192, 1)',
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -97,26 +97,136 @@ const chart = new Chart(ctx, {
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
             x: {
-                title: { display: true, text: 'Index' }
+                title: { display: true, text: 'Time' }
             },
             y: {
-                title: { display: true, text: 'Value' },
+                title: { display: true, text: 'Volts' },
                 beginAtZero: true
             }
         }
     }
 });
 
+const ctx_p = document.getElementById('Pressure').getContext('2d');
+const chart_p = new Chart(ctx_p, {
+    type: 'line',
+    data: {
+        labels: [], // X-axis labels (e.g., 0, 1, 2, ...)
+        datasets: [{
+            label: 'Presssure (kPa)',
+            data: [], // Y-axis data
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                title: { display: true, text: 'Time' }
+            },
+            y: {
+                title: { display: true, text: 'Pressure' },
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+const ctx_a = document.getElementById('Altitude').getContext('2d');
+const chart_a = new Chart(ctx_a, {
+    type: 'line',
+    data: {
+        labels: [], // X-axis labels (e.g., 0, 1, 2, ...)
+        datasets: [{
+            label: 'Altitude (m)',
+            data: [], // Y-axis data
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                title: { display: true, text: 'Time' }
+            },
+            y: {
+                title: { display: true, text: 'Altitude' },
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+const ctx_t = document.getElementById('Temperature').getContext('2d');
+const chart_t = new Chart(ctx_t, {
+    type: 'line',
+    data: {
+        labels: [], // X-axis labels (e.g., 0, 1, 2, ...)
+        datasets: [{
+            label: 'Temperature (C)',
+            data: [], // Y-axis data
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                title: { display: true, text: 'Time' }
+            },
+            y: {
+                title: { display: true, text: 'Temperature' },
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+const chartlst = [chart_v, chart_p, chart_a, chart_t];
+const chart_data = []
+
 // Function to update the chart with new data
-function updateChart(newData) {
-    // Add new x-axis labels (index based)
-    chart.data.labels.push(chart.data.labels.length);
+function updateChart() {
+    // Ensure we have at least 9 elements in msgArr to prevent undefined access
+    if (msgArr.length >= 9) {
+        // Add new x-axis label (based on the length of the labels array)
+        chartlst.forEach((chart, index) => {
+            chart.data.labels.push(chart.data.labels.length); // Increment x-axis labels
+            
+            // Update chart with new y-axis data
+            const chart_data = [msgArr[8], msgArr[7], msgArr[5], msgArr[6]]; // Extract data for each chart
+            chart.data.datasets[0].data.push(chart_data[index]); // Assign the correct value to the chart
 
-    // Add new y-axis data
-    chart.data.datasets[0].data.push(newData);
-
-    // Update the chart
-    chart.update();
+            // Update the chart
+            chart.update();
+        });
+    } else {
+        console.error("Not enough data in msgArr to update the charts");
+    }
 }
+
+function darkMode() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+} 
+
+document.getElementById('darkModeToggle').addEventListener('click',()=>{
+    if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
+        document.documentElement.setAttribute('data-bs-theme','light')
+    }
+    else {
+        document.documentElement.setAttribute('data-bs-theme','dark')
+    }
+})

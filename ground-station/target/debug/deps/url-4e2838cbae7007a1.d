@@ -1,0 +1,13 @@
+C:\Users\bcus9\Documents\GitHub\rotorstorm-ground-station\hello_world\target\debug\deps\liburl-4e2838cbae7007a1.rmeta: C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\lib.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\encoding.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\host.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\origin.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\path_segments.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\parser.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\slicing.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\form_urlencoded.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\quirks.rs
+
+C:\Users\bcus9\Documents\GitHub\rotorstorm-ground-station\hello_world\target\debug\deps\url-4e2838cbae7007a1.d: C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\lib.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\encoding.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\host.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\origin.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\path_segments.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\parser.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\slicing.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\form_urlencoded.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\quirks.rs
+
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\lib.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\encoding.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\host.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\origin.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\path_segments.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\parser.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\slicing.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\form_urlencoded.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\url-1.7.2\src\quirks.rs:
