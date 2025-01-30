@@ -46,16 +46,16 @@ body {
 /* } */
 
 /* Graph section - grid for graphs */
-/* .graph-grid {
+.graph-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two columns */
-    /* grid-template-rows: 1fr 1fr; /* Two rows */
-    /* gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr; 
+    gap: 10px;
     width: 100%;
-    height: calc(100vh - 100px); /* Make grid take up full height of the container */
-    /* box-sizing: border-box;
-    padding: 10px; */ 
-/* }  */
+    height: calc(100vh - 100px);
+    box-sizing: border-box;
+    padding: 10px;
+}
 
 /* Adjust the tab content height so it fits correctly */
 /* .tab-content {
@@ -84,4 +84,9 @@ body {
 /* .row {
     margin: 0;
     width: 100%;
+} */
+
+/* .graph-grid canvas {
+    width: 100% !important;
+    height: auto !important;
 } */

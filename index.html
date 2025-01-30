@@ -2,40 +2,26 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  </meta>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </meta>
+  <meta charset="UTF-8"></meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
   <title>🔥GCS🔥</title>
-  <link rel="icon" type="image/x-icon" href="rotorstorm_square.png">
-  </link>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  </link>
-  <link rel="stylesheet" href="styles.css">
-  </link>
+  <link rel="icon" type="image/x-icon" href="rotorstorm_square.png"></link>
+  <link rel="stylesheet" href="css/bootstrap.min.css"></link>
+  <link rel="stylesheet" href="styles.css"></link>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
-
 </head>
 
 <body>
-
   <div class="container-fluid min-vh-100 d-flex flex-column">
     <div class="row flex-grow-1">
       <div class="col-md-2 border">
-        <!-- <div class="container"> -->
-        <!-- <div class="col-md-4 px-0"> -->
-        <img src="rotorstorm-logo.png" class="img-fluid"></img>
-        <!-- </div> -->
-        <!-- </div> -->
-
-        <!-- <div class="container"> -->
-        <!-- <div class="row"> -->
-        <div class="d-flex flex-column justify-content-between" style="padding-top: 10px; padding-bottom: 10px">
+        <img src="rotorstorm-logo.png" class="img-fluid" style="padding-top: 10px;"></img>
+        
+        <div class="d-flex flex-column flex-grow-1 justify-content-between py-3">
           <div id="element1" data-label="1">TEAM ID: <span class="dynamic"></span></div>
           <div id="element2" data-label="2">MISSION TIME: <span class="dynamic"></span></div>
           <div id="element3" data-label="3">PACKET COUNT: <span class="dynamic"></span></div>
@@ -67,14 +53,12 @@
           <div id="element30" data-label="30">FLIGHT_TIME: <span class="dynamic"></span></div>
           <div id="element31" data-label="31">CURRENT: <span class="dynamic"></span></div>
         </div>
-      </div>
-      <!-- </div>
-        </div> -->
 
-      <!-- </div> -->
+      </div>
 
       <!-- Main Body -->
-      <!-- </div> -->
+
+      <!-- Tabs on top -->
       <div class="col-md-10 border">
         <ul class="nav nav-tabs">
           <li class="nav-item">
@@ -87,13 +71,10 @@
             <a class="nav-link" data-bs-toggle="tab" href="#settings">Settings</a>
           </li>
         </ul>
-        <!-- </div>
-          </div> -->
-        <!-- </div> -->
 
-
-        <!-- Tab panes -->
+        <!-- Tab panes content-->
         <div class="tab-content">
+          
           <div class="tab-pane container active" id="graphs">
             <div class="graph-grid">
               <div>
@@ -108,10 +89,11 @@
               <div>
                 <canvas id="Altitude"></canvas>
               </div>
+              <div>
+                <canvas id="Magnetism"></canvas>
+              </div>
             </div>
           </div>
-
-
 
           <div class="tab-pane container fade" id="websocket">
             <label for="ws-url">WebSocket URL:</label>
@@ -134,8 +116,6 @@
       </div>
     </div>
   </div>
-
-
 
   <script src="main.js"></script>
 </body>

@@ -194,7 +194,36 @@ const chart_t = new Chart(ctx_t, {
     }
 });
 
-const chartlst = [chart_v, chart_p, chart_a, chart_t];
+const ctx_m = document.getElementById('Magnetism').getContext('2d');
+const chart_m = new Chart(ctx_m, {
+    type: 'line',
+    data: {
+        labels: [], // X-axis labels (e.g., 0, 1, 2, ...)
+        datasets: [{
+            label: 'Magnetism (gauss)',
+            data: [], // Y-axis data
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                title: { display: true, text: 'Time' }
+            },
+            y: {
+                title: { display: true, text: 'magnet' },
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+const chartlst = [chart_v, chart_p, chart_a, chart_t, chart_m];
 const chart_data = []
 
 // Function to update the chart with new data
@@ -206,7 +235,7 @@ function updateChart() {
             chart.data.labels.push(chart.data.labels.length); // Increment x-axis labels
             
             // Update chart with new y-axis data
-            const chart_data = [msgArr[8], msgArr[7], msgArr[5], msgArr[6]]; // Extract data for each chart
+            const chart_data = [msgArr[8], msgArr[7], msgArr[5], msgArr[6], msgArr[15]]; // Extract data for each chart
             chart.data.datasets[0].data.push(chart_data[index]); // Assign the correct value to the chart
 
             // Update the chart
