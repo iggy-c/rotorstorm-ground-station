@@ -199,13 +199,29 @@ const chart_m = new Chart(ctx_m, {
     type: 'line',
     data: {
         labels: [], // X-axis labels (e.g., 0, 1, 2, ...)
-        datasets: [{
-            label: 'Magnetism (gauss)',
-            data: [], // Y-axis data
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderWidth: 1
-        }]
+        datasets: [
+            {
+                label: 'Magnetism R (gauss)',
+                data: [], // Y-axis data
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 1
+            },
+            {
+                label: 'Magnetism P (gauss)',
+                data: [], // Y-axis data
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 1
+            },
+            {
+                label: 'Magnetism Y (gauss)',
+                data: [], // Y-axis data
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 1
+            }
+        ]
     },
     options: {
         responsive: true,
@@ -215,7 +231,7 @@ const chart_m = new Chart(ctx_m, {
                 title: { display: true, text: 'Time' }
             },
             y: {
-                title: { display: true, text: 'magnet' },
+                title: { display: true, text: 'Magnetism' },
                 beginAtZero: true
             }
         }
@@ -223,24 +239,31 @@ const chart_m = new Chart(ctx_m, {
 });
 
 
-const chartlst = [chart_v, chart_p, chart_a, chart_t, chart_m];
+const chartlst = [chart_v, chart_p, chart_a, chart_t];
 const chart_data = []
 
 // Function to update the chart with new data
 function updateChart() {
-    // Ensure we have at least 9 elements in msgArr to prevent undefined access
+    // prevent undefined access
     if (msgArr.length >= 9) {
         // Add new x-axis label (based on the length of the labels array)
         chartlst.forEach((chart, index) => {
             chart.data.labels.push(chart.data.labels.length); // Increment x-axis labels
             
             // Update chart with new y-axis data
-            const chart_data = [msgArr[8], msgArr[7], msgArr[5], msgArr[6], msgArr[15]]; // Extract data for each chart
+            const chart_data = [msgArr[8], msgArr[7], msgArr[5], msgArr[6]]; // Extract data for each chart
             chart.data.datasets[0].data.push(chart_data[index]); // Assign the correct value to the chart
 
             // Update the chart
             chart.update();
         });
+        chart_m.data.labels.push(chart_m.data.labels.length);
+        chart_m.data.datasets[0].data.push(msgArr[15]);
+        chart_m.data.datasets[1].data.push(msgArr[16]);
+        chart_m.data.datasets[2].data.push(msgArr[17]);
+        chart_m.update();
+        
+
     } else {
         console.error("Not enough data in msgArr to update the charts");
     }
