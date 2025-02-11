@@ -1,0 +1,10 @@
+C:\Users\bcus9\Documents\GitHub\rotorstorm-ground-station\ground-station\target\debug\deps\libserialport-109a842c161eb19b.rmeta: C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src/lib.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\mod.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\com.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\dcb.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\enumerate.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\error.rs
+
+C:\Users\bcus9\Documents\GitHub\rotorstorm-ground-station\ground-station\target\debug\deps\serialport-109a842c161eb19b.d: C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src/lib.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\mod.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\com.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\dcb.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\enumerate.rs C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\error.rs
+
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src/lib.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\mod.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\com.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\dcb.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\enumerate.rs:
+C:\Users\bcus9\.cargo\registry\src\index.crates.io-6f17d22bba15001f\serialport-4.6.1\src\windows\error.rs:

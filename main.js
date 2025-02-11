@@ -1,6 +1,32 @@
 let socket;
 const logDiv = document.getElementById('log');
 let msgArr = [];
+var border_width = 3
+
+
+//map
+var map = L.map('map').setView([38, -78], 13);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+var latlngs = [
+    [37.13, -78.60],
+    [37.15, -78.61],
+    [37.14, -78.62],
+    [37.145, -78.625],
+    [37.15, -78.685],
+    [37.16, -78.701],
+    [37.155, -78.705],
+    [37.158, -78.71],
+    [37.159, -78.709],
+];
+
+var polyline = L.polyline(latlngs, {color: 'red', weight: 8,}).addTo(map);
+
+// // zoom the map to the polyline
+// map.fitBounds(polyline.getBounds());
 
 
 // Add a log message
@@ -21,17 +47,20 @@ function update() {
         dynamicPart.textContent = chunk.join(', '); // Update only the dynamic part
     }); 
 
+    //map update
+    polyline.addLatLng([msgArr[21], msgArr[22]]);
+
 }
 
-function foo(message_arr) {
-    console.log("foo() called with:", message_arr);
-    if (message_arr.length > 0) {
-        document.getElementById("teamnum").innerHTML = message_arr[0];
-    } else {
-        console.error("message_arr is empty or invalid");
-        document.getElementById("teamnum").innerHTML = "No data";
-    }
-}
+// function foo(message_arr) {
+//     console.log("foo() called with:", message_arr);
+//     if (message_arr.length > 0) {
+//         document.getElementById("teamnum").innerHTML = message_arr[0];
+//     } else {
+//         console.error("message_arr is empty or invalid");
+//         document.getElementById("teamnum").innerHTML = "No data";
+//     }
+// }
 
 // Connect to WebSocket
 document.getElementById('connect-btn').addEventListener('click', () => {
@@ -50,7 +79,7 @@ document.getElementById('connect-btn').addEventListener('click', () => {
         // Attempt to split the data from websocket
         try {
             msgArr = event.data.split(",");
-            foo(msgArr);
+            // foo(msgArr);
         } catch (error) {
             console.error("Error splitting data:", error);
         }
@@ -81,7 +110,7 @@ document.getElementById('send-btn').addEventListener('click', () => {
     }
 });
 
-// Initialize the chart
+// Charts
 const ctx_v = document.getElementById('Voltage').getContext('2d');
 const chart_v = new Chart(ctx_v, {
     type: 'line',
@@ -90,9 +119,9 @@ const chart_v = new Chart(ctx_v, {
         datasets: [{
             label: 'Volts (V)',
             data: [], // Y-axis data
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderWidth: 1
+            borderColor: 'rgb(107, 107, 189)',
+            backgroundColor: 'rgba(107, 107, 189, 1)',
+            borderWidth: border_width
         }]
     },
     options: {
@@ -118,9 +147,9 @@ const chart_p = new Chart(ctx_p, {
         datasets: [{
             label: 'Presssure (kPa)',
             data: [], // Y-axis data
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderWidth: 1
+            borderColor: 'rgb(107, 107, 189)',
+            backgroundColor: 'rgba(107, 107, 189, 1)',
+            borderWidth: border_width
         }]
     },
     options: {
@@ -146,9 +175,9 @@ const chart_a = new Chart(ctx_a, {
         datasets: [{
             label: 'Altitude (m)',
             data: [], // Y-axis data
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderWidth: 1
+            borderColor: 'rgb(107, 107, 189)',
+            backgroundColor: 'rgba(107, 107, 189, 1)',
+            borderWidth: border_width
         }]
     },
     options: {
@@ -174,9 +203,9 @@ const chart_t = new Chart(ctx_t, {
         datasets: [{
             label: 'Temperature (C)',
             data: [], // Y-axis data
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderWidth: 1
+            borderColor: 'rgb(107, 107, 189)',
+            backgroundColor: 'rgba(107, 107, 189, 1)',
+            borderWidth: border_width
         }]
     },
     options: {
@@ -203,23 +232,23 @@ const chart_m = new Chart(ctx_m, {
             {
                 label: 'Magnetism R (gauss)',
                 data: [], // Y-axis data
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderWidth: 1
+                borderColor: 'rgba(0, 255, 0, 1)',
+                backgroundColor: 'rgba(0, 255, 0, 1)',
+                borderWidth: border_width
             },
             {
                 label: 'Magnetism P (gauss)',
                 data: [], // Y-axis data
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderWidth: 1
+                borderColor: 'rgba(255, 0, 0, 1)',
+                backgroundColor: 'rgba(255, 0, 0, 1)',
+                borderWidth: border_width
             },
             {
                 label: 'Magnetism Y (gauss)',
                 data: [], // Y-axis data
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderWidth: 1
+                borderColor: 'rgb(0, 0, 255)',
+                backgroundColor: 'rgba(0, 0, 255, 1)',
+                borderWidth: border_width
             }
         ]
     },
@@ -232,6 +261,50 @@ const chart_m = new Chart(ctx_m, {
             },
             y: {
                 title: { display: true, text: 'Magnetism' },
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+const ctx_acc = document.getElementById('Acceleration').getContext('2d');
+const chart_acc = new Chart(ctx_acc, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [
+            {
+                label: 'Acceleration R (m/s^2)',
+                data: [], // Y-axis data
+                borderColor: 'rgba(0, 255, 0, 1)',
+                backgroundColor: 'rgba(0, 255, 0, 1)',
+                borderWidth: border_width
+            },
+            {
+                label: 'Acceleration P (m/s^2)',
+                data: [], // Y-axis data
+                borderColor: 'rgba(255, 0, 0, 1)',
+                backgroundColor: 'rgba(255, 0, 0, 1)',
+                borderWidth: border_width
+            },
+            {
+                label: 'Acceleration Y (m/s^2)',
+                data: [], // Y-axis data
+                borderColor: 'rgb(0, 0, 255)',
+                backgroundColor: 'rgba(0, 0, 255, 1)',
+                borderWidth: border_width
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                title: { display: true, text: 'Time' }
+            },
+            y: {
+                title: { display: true, text: 'Acceleration' },
                 beginAtZero: true
             }
         }
@@ -257,6 +330,11 @@ function updateChart() {
             // Update the chart
             chart.update();
         });
+        chart_acc.data.labels.push(chart_acc.data.labels.length);
+        chart_acc.data.datasets[0].data.push(msgArr[12]);
+        chart_acc.data.datasets[1].data.push(msgArr[13]);
+        chart_acc.data.datasets[2].data.push(msgArr[14]);
+        chart_acc.update();
         chart_m.data.labels.push(chart_m.data.labels.length);
         chart_m.data.datasets[0].data.push(msgArr[15]);
         chart_m.data.datasets[1].data.push(msgArr[16]);
@@ -282,3 +360,4 @@ document.getElementById('darkModeToggle').addEventListener('click',()=>{
         document.documentElement.setAttribute('data-bs-theme','dark')
     }
 })
+

@@ -6,13 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
   <title>🔥GCS🔥</title>
   <link rel="icon" type="image/x-icon" href="rotorstorm_square.png"></link>
-  <link rel="stylesheet" href="css/bootstrap.min.css"></link>
+  <link rel="stylesheet" href="bootstrap-offline\css\bootstrap-5.0.2-dist\css\bootstrap.css">
   <link rel="stylesheet" href="styles.css"></link>
+  <!-- <script src="bootstrap-offline\css\bootstrap-5.0.2-dist\js"></script> -->
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="crossorigin=""/></link>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 
 <body>
@@ -34,12 +38,12 @@
           <div id="element10" data-label="10">GYRO_R: <span class="dynamic"></span></div>
           <div id="element11" data-label="11">GYRO_P: <span class="dynamic"></span></div>
           <div id="element12" data-label="12">GYRO_Y: <span class="dynamic"></span></div>
-          <div id="element13" data-label="13">ACCEL_R: <span class="dynamic"></span></div>
-          <div id="element14" data-label="14">ACCEL_P: <span class="dynamic"></span></div>
-          <div id="element15" data-label="15">ACCEL_Y: <span class="dynamic"></span></div>
-          <div id="element16" data-label="16">MAG_R: <span class="dynamic"></span></div>
-          <div id="element17" data-label="17">MAG_P: <span class="dynamic"></span></div>
-          <div id="element18" data-label="18">MAG_Y: <span class="dynamic"></span></div>
+          <div id="element13" data-label="13"style="display: none;">ACCEL_R: <span class="dynamic"></span></div>
+          <div id="element14" data-label="14"style="display: none;">ACCEL_P: <span class="dynamic"></span></div>
+          <div id="element15" data-label="15"style="display: none;">ACCEL_Y: <span class="dynamic"></span></div>
+          <div id="element16" data-label="16"style="display: none;">MAG_R: <span class="dynamic"></span></div>
+          <div id="element17" data-label="17"style="display: none;">MAG_P: <span class="dynamic"></span></div>
+          <div id="element18" data-label="18"style="display: none;">MAG_Y: <span class="dynamic"></span></div>
           <div id="element19" data-label="19">ROTATION RATE: <span class="dynamic"></span></div>
           <div id="element20" data-label="20">GPS TIME: <span class="dynamic"></span></div>
           <div id="element21" data-label="21">GPS ALTITUDE: <span class="dynamic"></span></div>
@@ -63,6 +67,12 @@
         <ul class="nav nav-tabs">
           <li class="nav-item">
             <a class="nav-link active" data-bs-toggle="tab" href="#graphs">Graphs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#map">Map</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#simulation">Simulation</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" href="#websocket">Websocket</a>
@@ -92,11 +102,19 @@
               <div>
                 <canvas id="Magnetism"></canvas>
               </div>
-              <!-- <div>
+              <div>
                 <canvas id="Acceleration"></canvas>
-              </div> -->
+              </div>
             </div>
           </div>
+
+          <div class="tab-pane container fade" id="map">
+              <div id="map"></div>
+          </div>
+
+          <div class="tab-pane container fade" id="simulation">
+            <div>asdflkajsd;flkjsa;lkfja</div>
+        </div>
 
           <div class="tab-pane container fade" id="websocket">
             <label for="ws-url">WebSocket URL:</label>
