@@ -1,1 +1,0 @@
-C:\Users\bcus9\Documents\GitHub\rotorstorm-ground-station\serial_test\serial_test\target\debug\serial_test.exe: C:\Users\bcus9\Documents\GitHub\rotorstorm-ground-station\serial_test\serial_test\src\main.rs
