@@ -1,5 +1,5 @@
+use std::usize;
 use serial2_tokio::SerialPort;
-// use tokio::io::AsyncReadExt;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -15,11 +15,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 // look for complete packets starting with '~' (0x7E)
                 while let Some(start) = data.iter().position(|&b| b == 0x7E) {
                     if data.len() > start + 2 {
-                        let length = ((data[start + 1] as usize) << 8) | (data[start + 2] as usize);
-                        if data.len() >= start + 3 + length {
+
+                        let length = data[start + 2] as usize;
+                        if data.len() >= start + 4 + length && data.len() > 15{
                             let packet = &data[start..start + 3 + length];
                             println!("{:?}", String::from_utf8_lossy(&packet[15..]));
-                            data.drain(..start + 3 + length);
+                            for (_i, b) in (&data).into_iter().enumerate(){
+                                print!("{:02X} ", b);
+                            }
+                            println!("");
+                            data.clear();
                             continue;
                         }
                     }
