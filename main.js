@@ -2,6 +2,7 @@ let socket;
 const logDiv = document.getElementById('log');
 let msgArr = [];
 var border_width = 3
+var radius_width = 0
 
 
 //map
@@ -52,15 +53,6 @@ function update() {
 
 }
 
-// function foo(message_arr) {
-//     console.log("foo() called with:", message_arr);
-//     if (message_arr.length > 0) {
-//         document.getElementById("teamnum").innerHTML = message_arr[0];
-//     } else {
-//         console.error("message_arr is empty or invalid");
-//         document.getElementById("teamnum").innerHTML = "No data";
-//     }
-// }
 
 // Connect to WebSocket
 document.getElementById('connect-btn').addEventListener('click', () => {
@@ -83,7 +75,6 @@ document.getElementById('connect-btn').addEventListener('click', () => {
         } catch (error) {
             console.error("Error splitting data:", error);
         }
-
         update();
         updateChart();
     });
@@ -121,12 +112,18 @@ const chart_v = new Chart(ctx_v, {
             data: [], // Y-axis data
             borderColor: 'rgb(107, 107, 189)',
             backgroundColor: 'rgba(107, 107, 189, 1)',
-            borderWidth: border_width
+            borderWidth: border_width 
         }]
     },
     options: {
         responsive: true,
         maintainAspectRatio: false,
+        animation: false,
+        elements: {
+            point:{
+                radius: radius_width
+            }
+        },
         scales: {
             x: {
                 title: { display: true, text: 'Time' }
@@ -155,6 +152,12 @@ const chart_p = new Chart(ctx_p, {
     options: {
         responsive: true,
         maintainAspectRatio: false,
+        animation: false,
+        elements: {
+            point:{
+                radius: radius_width
+            }
+        },
         scales: {
             x: {
                 title: { display: true, text: 'Time' }
@@ -183,6 +186,13 @@ const chart_a = new Chart(ctx_a, {
     options: {
         responsive: true,
         maintainAspectRatio: false,
+        animation: false,
+        beginAtZero: false,
+        elements: {
+            point:{
+                radius: radius_width
+            }
+        },
         scales: {
             x: {
                 title: { display: true, text: 'Time' }
@@ -211,6 +221,12 @@ const chart_t = new Chart(ctx_t, {
     options: {
         responsive: true,
         maintainAspectRatio: false,
+        animation: false,
+        elements: {
+            point:{
+                radius: radius_width
+            }
+        },
         scales: {
             x: {
                 title: { display: true, text: 'Time' }
@@ -255,6 +271,12 @@ const chart_m = new Chart(ctx_m, {
     options: {
         responsive: true,
         maintainAspectRatio: false,
+        animation: false,
+        elements: {
+            point:{
+                radius: radius_width
+            }
+        },
         scales: {
             x: {
                 title: { display: true, text: 'Time' }
@@ -299,6 +321,12 @@ const chart_acc = new Chart(ctx_acc, {
     options: {
         responsive: true,
         maintainAspectRatio: false,
+        animation: false,
+        elements: {
+            point:{
+                radius: radius_width
+            }
+        },
         scales: {
             x: {
                 title: { display: true, text: 'Time' }

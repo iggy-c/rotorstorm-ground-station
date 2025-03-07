@@ -57,21 +57,21 @@ fn main() {
                     println!("New WebSocket connection established!");
 
                     loop {
-                        match websocket.read() {
-                            Ok(msg) => {
-                                // Print the received message
-                                println!("WS Received: {}", msg);
+                        // match websocket.read() {
+                        //     Ok(msg) => {
+                        //         // Print the received message
+                        //         println!("WS Received: {}", msg);
 
-                                // Echo the message back to the client
-                                if msg.is_text() || msg.is_binary() {
-                                    websocket.send(msg).expect("Failed to send message");
-                                }
-                            }
-                            Err(e) => {
-                                println!("Error: {}", e);
-                                break;
-                            }
-                        }
+                        //         // Echo the message back to the client
+                        //         if msg.is_text() || msg.is_binary() {
+                        //             websocket.send(msg).expect("Failed to send message");
+                        //         }
+                        //     }
+                        //     Err(e) => {
+                        //         println!("Error: {}", e);
+                        //         break;
+                        //     }
+                        // }
                         match serialread() {
                             Ok(msg) => {
                                 println!("Serial Received: {}", msg);
