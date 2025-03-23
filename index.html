@@ -1,3 +1,36 @@
+<!-- 
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::*:##:@@%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::+*##:@@@::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::*:##@@@:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::-##:@@@:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::#:@@@::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::##:@@@::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::@@@:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::@@@::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::@@@::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::@@@@@@@@@@@@=:=@@@@@@@@@@@::@@@@@@@@@@@::@@@@@@@@@@@::@@@@@@@@@@@@:::::::::::::::::::::::::::::::::
+::::::::@@@::::::@@@=:@@@::::::@@@::::::@@@::::::@@@:::::=@@@:@@@::::::@@@:::::::::::::::::::::::::::::::::
+::::::::@@@::@@@@@@@=:@@@::::::@@@::::::@@@::::::@@@:::::=@@@:@@@::@@@@@@@:::::::::::::::::::::::::::::::::
+::::::::@@@:::@@@@::::@@@::::::@@@::::::@@@::::::@@@:::::=@@@:@@@:::@@@+:::::::::::::::::::::::::::::::::::
+::::::::@@@:::::@@@:::@@@@::::@@@@::::::@@@::::::@@@:::::@@@@:@@@::::@@@@::::::::::::::::::::::::::::::::::
+::::::::@@@::::::@@@:@@@@@@@@@@@@:::::::@@@:::::::@@@@@@@@@:::@@@::::::@@@:::::::::::::::::::::::::::::::::
+:::::::::::::::::::::@@@::::::::@@@@@@@@@@@::@@@@@@@@@@@:::@@@@@@@@@@::@@@@@@@@@@@@::@:::::::::::@:::::::::
+::::::::::::::::::::@@@::::::::@@@:::::::::::::::@@@::::::@@@:::::@@@@:@@@::::::@@@::@@@@:::::@@@@:::::::::
+::::::::::::::::::::@@@::::::::@@@@@@@-::::::::::@@@::::::@@@:::::%@@@:@@@:@@@@@@@@::@@@@@@@@@@@@@:::::::::
+:::::::::::::::::::@@@:##:::::::-@@@@@@@@@@::::::@@@::::::@@@:::::%@@@:@@@::%@@@:::::@@@::@@@::@@@:::::::::
+::::::::::::::::::@@@:##::::::::::::::::@@@::::::@@@::::::@@@:::::%@@@:@@@::::@@@::::@@@:::::::@@@:::::::::
+::::::::::::::::::@@@:#:*=:::::@@@@@@@@@@@:::::::@@@::::::@@@@@@@@@@@::@@@:::::@@@@::@@@:::::::@@@:::::::::
+:::::::::::::::::@@@:##:*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::@@@*#:*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::##+*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,25 +38,25 @@
   <meta charset="UTF-8"></meta>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
   <title>🔥GCS🔥</title>
-  <link rel="icon" type="image/x-icon" href="rotorstorm_square.png"></link>
+  <link rel="icon" type="image/x-icon" href="assets\rotorstorm_square.png"></link>
   <link rel="stylesheet" href="bootstrap-offline\css\bootstrap-5.0.2-dist\css\bootstrap.css">
   <link rel="stylesheet" href="styles.css"></link>
-  <!-- <script src="bootstrap-offline\css\bootstrap-5.0.2-dist\js"></script> -->
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="chartsjs-offline/chart.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  <script src="bootstrap-offline\js\popper.min.js"></script>
+  <script src="bootstrap-offline\js\bootstrap.min.js"></script>
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="crossorigin=""/></link>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <link rel="stylesheet" href="leaflet-offline\leaflet.css" />
+  <script src="leaflet-offline\leaflet.js"></script>
 </head>
 
 <body>
   <div class="container-fluid min-vh-100 d-flex flex-column">
     <div class="row flex-grow-1">
       <div class="col-md-2 border">
-        <img src="rotorstorm-logo.png" class="img-fluid" style="padding-top: 10px;"></img>
+        <img src="assets\rotorstorm-logo.png" class="img-fluid" style="padding-top: 10px;"></img>
         
         <div class="d-flex flex-column flex-grow-1 justify-content-between py-3">
           <div id="element1" data-label="1">TEAM ID: <span class="dynamic"></span></div>
@@ -63,7 +96,7 @@
       <!-- Main Body -->
 
       <!-- Tabs on top -->
-      <div class="col-md-10 border">
+      <div class="col-md-10" >
         <ul class="nav nav-tabs">
           <li class="nav-item">
             <a class="nav-link active" data-bs-toggle="tab" href="#graphs">Graphs</a>
@@ -91,9 +124,6 @@
                 <canvas id="Voltage"></canvas>
               </div>
               <div>
-                <canvas id="Pressure"></canvas>
-              </div>
-              <div>
                 <canvas id="Temperature"></canvas>
               </div>
               <div>
@@ -105,6 +135,10 @@
               <div>
                 <canvas id="Acceleration"></canvas>
               </div>
+              <div id="wmap"></div>
+              <!-- <div>
+                <canvas id="Pressure"></canvas>
+              </div> -->
             </div>
           </div>
 
@@ -114,16 +148,18 @@
 
           <div class="tab-pane container fade" id="simulation">
             <div>asdflkajsd;flkjsa;lkfja</div>
-        </div>
+          </div>
 
-          <div class="tab-pane container fade" id="websocket">
-            <label for="ws-url">WebSocket URL:</label>
-            <input id="ws-url" type="text" value="ws://127.0.0.1:9001"></input>
-            <button id="connect-btn">Connect</button>
+          <div class="tab-pane container fade"  id="websocket">
+            <div>
+              <label for="ws-url">WebSocket URL:</label>
+              <input id="ws-url" type="text" value="ws://localhost:8000">
+              <button id="connect-btn">Connect</button>
+            </div>
             <div id="log"></div>
             <div>
-              <input id="message" type="text" placeholder="Message to send"></input>
-              <button id="send-btn">Send</button>
+              <input id="message" type="text" placeholder="Message to send">
+              <button id="send-btn" disabled>Send</button>
             </div>
           </div>
 
@@ -134,6 +170,66 @@
             </div>
           </div>
         </div>
+        <div id="footer">
+          <div class="button-grid">
+                  
+                  <!-- Two stacked switches -->
+                  <div class="j d-flex flex-column justify-content-center">
+                      <div class="form-check form-switch mb-2">
+                          <input class="form-check-input" type="checkbox" id="switch1" checked>
+                          <label class="form-check-label" for="switch1">Stabilized Camera</label>
+                      </div>
+                      <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="switch2">
+                          <label class="form-check-label" for="switch2">Autogyro Camera</label>
+                      </div>
+                  </div>
+      
+                  <!-- Vertical line -->
+                  <div class="vr"></div>
+      
+                  <!-- Switch + Button -->
+                  <div class="d-flex align-items-center">
+                      <div class="form-check form-switch me-3">
+                          <input class="form-check-input" type="checkbox" id="switch3">
+                          <label class="form-check-label" for="switch3">Telemetry</label>
+                      </div>
+                      <!-- <button class="btn btn-primary">Action</button> -->
+                  </div>
+      
+                  <!-- Vertical line -->
+                  <div class="vr"></div>
+      
+                  <!-- Two buttons -->
+                  <div class="d-flex align-items-center">
+                      <button class="btn btn-success me-3" id="cal-btn">Calibrate</button>
+                      <button class="btn btn-danger">Clear Data</button>
+                  </div>
+
+                  <div class="vr"></div>
+
+                  <button class="btn btn-primary" id="prime-btn">Prime</button>
+                  <button class="btn btn-primary" id="disengage-btn">Disengage</button>
+
+                  <div class="vr"></div>
+
+                  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                    <div class="btn-group" role="group">
+                      <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        GPS
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="#">Dropdown link</a>
+                        <a class="dropdown-item" href="#">Dropdown link</a>
+                      </div>
+                    </div>
+                    
+                    <button type="button" class="btn btn-secondary">Send Time</button>
+                  
+                  </div>
+      
+          </div>
+      </div>
       </div>
     </div>
   </div>

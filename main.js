@@ -3,14 +3,21 @@ const logDiv = document.getElementById('log');
 let msgArr = [];
 var border_width = 3
 var radius_width = 0
+var xlabel_disp = false
+var ylabel_disp = false
 
 
 //map
 var map = L.map('map').setView([38, -78], 13);
+var wmap = L.map('wmap').setView([38, -78], 13);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(wmap);
 
 var latlngs = [
     [37.13, -78.60],
@@ -25,6 +32,7 @@ var latlngs = [
 ];
 
 var polyline = L.polyline(latlngs, {color: 'red', weight: 8,}).addTo(map);
+var polyline = L.polyline(latlngs, {color: 'red', weight: 8,}).addTo(wmap);
 
 // // zoom the map to the polyline
 // map.fitBounds(polyline.getBounds());
@@ -101,6 +109,33 @@ document.getElementById('send-btn').addEventListener('click', () => {
     }
 });
 
+document.getElementById('prime-btn').addEventListener('click', () => {
+    if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send("CMD,3194,MEC,RELEASE,OFF");
+        logMessage(`Sent command: CMD,3194,MEC,RELEASE,OFF`);
+    } else {
+        logMessage('WebSocket is not connected');
+    }
+});
+
+document.getElementById('disengage-btn').addEventListener('click', () => {
+    if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send("CMD,3194,MEC,RELEASE,ON");
+        logMessage(`Sent command: CMD,3194,MEC,RELEASE,ON`);
+    } else {
+        logMessage('WebSocket is not connected');
+    }
+});
+
+document.getElementById('cal-btn').addEventListener('click', () => {
+    if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send("CMD,3194,CAL");
+        logMessage(`Sent command: CMD,3194,CAL`);
+    } else {
+        logMessage('WebSocket is not connected');
+    }
+});
+
 // Charts
 const ctx_v = document.getElementById('Voltage').getContext('2d');
 const chart_v = new Chart(ctx_v, {
@@ -126,49 +161,49 @@ const chart_v = new Chart(ctx_v, {
         },
         scales: {
             x: {
-                title: { display: true, text: 'Time' }
+                title: { display: xlabel_disp, text: 'Time' }
             },
             y: {
-                title: { display: true, text: 'Volts' },
+                title: { display: ylabel_disp, text: 'Volts' },
                 beginAtZero: true
             }
         }
     }
 });
 
-const ctx_p = document.getElementById('Pressure').getContext('2d');
-const chart_p = new Chart(ctx_p, {
-    type: 'line',
-    data: {
-        labels: [], // X-axis labels (e.g., 0, 1, 2, ...)
-        datasets: [{
-            label: 'Presssure (kPa)',
-            data: [], // Y-axis data
-            borderColor: 'rgb(107, 107, 189)',
-            backgroundColor: 'rgba(107, 107, 189, 1)',
-            borderWidth: border_width
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        animation: false,
-        elements: {
-            point:{
-                radius: radius_width
-            }
-        },
-        scales: {
-            x: {
-                title: { display: true, text: 'Time' }
-            },
-            y: {
-                title: { display: true, text: 'Pressure' },
-                beginAtZero: true
-            }
-        }
-    }
-});
+// const ctx_p = document.getElementById('Pressure').getContext('2d');
+// const chart_p = new Chart(ctx_p, {
+//     type: 'line',
+//     data: {
+//         labels: [], // X-axis labels (e.g., 0, 1, 2, ...)
+//         datasets: [{
+//             label: 'Presssure (kPa)',
+//             data: [], // Y-axis data
+//             borderColor: 'rgb(107, 107, 189)',
+//             backgroundColor: 'rgba(107, 107, 189, 1)',
+//             borderWidth: border_width
+//         }]
+//     },
+//     options: {
+//         responsive: true,
+//         maintainAspectRatio: false,
+//         animation: false,
+//         elements: {
+//             point:{
+//                 radius: radius_width
+//             }
+//         },
+//         scales: {
+//             x: {
+//                 title: { display: xlabel_disp, text: 'Time' }
+//             },
+//             y: {
+//                 title: { display: ylabel_disp, text: 'Pressure' },
+//                 beginAtZero: true
+//             }
+//         }
+//     }
+// });
 
 const ctx_a = document.getElementById('Altitude').getContext('2d');
 const chart_a = new Chart(ctx_a, {
@@ -195,10 +230,10 @@ const chart_a = new Chart(ctx_a, {
         },
         scales: {
             x: {
-                title: { display: true, text: 'Time' }
+                title: { display: xlabel_disp, text: 'Time' }
             },
             y: {
-                title: { display: true, text: 'Altitude' },
+                title: { display: ylabel_disp, text: 'Altitude' },
                 beginAtZero: true
             }
         }
@@ -229,10 +264,10 @@ const chart_t = new Chart(ctx_t, {
         },
         scales: {
             x: {
-                title: { display: true, text: 'Time' }
+                title: { display: xlabel_disp, text: 'Time' }
             },
             y: {
-                title: { display: true, text: 'Temperature' },
+                title: { display: ylabel_disp, text: 'Temperature' },
                 beginAtZero: true
             }
         }
@@ -279,10 +314,10 @@ const chart_m = new Chart(ctx_m, {
         },
         scales: {
             x: {
-                title: { display: true, text: 'Time' }
+                title: { display: xlabel_disp, text: 'Time' }
             },
             y: {
-                title: { display: true, text: 'Magnetism' },
+                title: { display: ylabel_disp, text: 'Magnetism' },
                 beginAtZero: true
             }
         }
@@ -296,21 +331,21 @@ const chart_acc = new Chart(ctx_acc, {
         labels: [],
         datasets: [
             {
-                label: 'Acceleration R (m/s^2)',
+                label: 'Acceleration R (m/s²)',
                 data: [], // Y-axis data
                 borderColor: 'rgba(0, 255, 0, 1)',
                 backgroundColor: 'rgba(0, 255, 0, 1)',
                 borderWidth: border_width
             },
             {
-                label: 'Acceleration P (m/s^2)',
+                label: 'Acceleration P (m/s²)',
                 data: [], // Y-axis data
                 borderColor: 'rgba(255, 0, 0, 1)',
                 backgroundColor: 'rgba(255, 0, 0, 1)',
                 borderWidth: border_width
             },
             {
-                label: 'Acceleration Y (m/s^2)',
+                label: 'Acceleration Y (m/s²)',
                 data: [], // Y-axis data
                 borderColor: 'rgb(0, 0, 255)',
                 backgroundColor: 'rgba(0, 0, 255, 1)',
@@ -329,10 +364,10 @@ const chart_acc = new Chart(ctx_acc, {
         },
         scales: {
             x: {
-                title: { display: true, text: 'Time' }
+                title: { display: xlabel_disp, text: 'Time' }
             },
             y: {
-                title: { display: true, text: 'Acceleration' },
+                title: { display: ylabel_disp, text: 'Acceleration' },
                 beginAtZero: true
             }
         }
@@ -340,7 +375,7 @@ const chart_acc = new Chart(ctx_acc, {
 });
 
 
-const chartlst = [chart_v, chart_p, chart_a, chart_t];
+const chartlst = [chart_v, chart_a, chart_t];
 const chart_data = []
 
 // Function to update the chart with new data
@@ -352,7 +387,7 @@ function updateChart() {
             chart.data.labels.push(chart.data.labels.length); // Increment x-axis labels
             
             // Update chart with new y-axis data
-            const chart_data = [msgArr[8], msgArr[7], msgArr[5], msgArr[6]]; // Extract data for each chart
+            const chart_data = [msgArr[8], msgArr[5], msgArr[6]]; // Extract data for each chart
             chart.data.datasets[0].data.push(chart_data[index]); // Assign the correct value to the chart
 
             // Update the chart
