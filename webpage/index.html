@@ -1,7 +1,5 @@
 <!-- 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::*:##:@@%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::+*##:@@@::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -27,8 +25,6 @@
 :::::::::::::::::@@@:##:*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::@@@*#:*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::##+*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  -->
 <!DOCTYPE html>
@@ -146,8 +142,25 @@
               <div id="map"></div>
           </div>
 
-          <div class="tab-pane container fade" id="simulation">
-            <div>asdflkajsd;flkjsa;lkfja</div>
+          <div class="tab-pane container fade" id="simulation" display: flex;>
+            <div class="centered">
+              <!-- <form method="post" enctype="multipart/form-data">
+                <label for="file"></label>
+                <input id="file" name="file" type="file">
+                <button class="btn btn-primary">Upload</button> 
+              </form> -->
+              <!-- <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Open File</button> -->
+              <input type="file" id="fileInput" accept=".txt" onchange="displayFile()">
+            </div>
+            <div class="centered-simp" >
+              <div class="button-container">
+                <button class="btn btn-success" id="none-btn">Enable</button>
+                <button class="btn btn-success" id="none-btn">Activate</button>
+                <button class="btn btn-danger" id="none-btn">Disable</button>
+              </div>
+            </div>
+            <div class="last-command">Last command sent: <br>CMD,3194,SIMP,101325</div>
+            <div id="log-sim" style="float:right;"></div>
           </div>
 
           <div class="tab-pane container fade"  id="websocket">
@@ -164,69 +177,70 @@
           </div>
 
           <div class="tab-pane container fade" id="settings">
-            <div class="form-check form-switch">
+            <!-- <div class="form-check form-switch">
               <input class="form-check-input" type="checkbox" role="switch" id="darkModeToggle"></input>
               <label class="form-check-label" for="flexSwitchCheckDefault">Dark Mode</label>
+            </div> -->
+            <div>
+              Select a text file: 
+              <input type="file" id="fileInput">
             </div>
+            <pre id="fileDisplayArea"></pre>
           </div>
         </div>
         <div id="footer">
-          <div class="button-grid">
-                  
-                  <!-- Two stacked switches -->
-                  <div class="j d-flex flex-column justify-content-center">
-                      <div class="form-check form-switch mb-2">
-                          <input class="form-check-input" type="checkbox" id="switch1" checked>
-                          <label class="form-check-label" for="switch1">Stabilized Camera</label>
-                      </div>
-                      <div class="form-check form-switch">
-                          <input class="form-check-input" type="checkbox" id="switch2">
-                          <label class="form-check-label" for="switch2">Autogyro Camera</label>
-                      </div>
-                  </div>
-      
-                  <!-- Vertical line -->
-                  <div class="vr"></div>
-      
-                  <!-- Switch + Button -->
-                  <div class="d-flex align-items-center">
-                      <div class="form-check form-switch me-3">
-                          <input class="form-check-input" type="checkbox" id="switch3">
-                          <label class="form-check-label" for="switch3">Telemetry</label>
-                      </div>
-                      <!-- <button class="btn btn-primary">Action</button> -->
-                  </div>
-      
-                  <!-- Vertical line -->
-                  <div class="vr"></div>
-      
-                  <!-- Two buttons -->
-                  <div class="d-flex align-items-center">
-                      <button class="btn btn-success me-3" id="cal-btn">Calibrate</button>
-                      <button class="btn btn-danger">Clear Data</button>
-                  </div>
+          <div class="button-grid">       
+            <!-- Two stacked switches -->
+            <div class="j d-flex flex-column justify-content-center">
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" id="switch1" checked>
+                    <label class="form-check-label" for="switch1">Stabilized Camera</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="switch2">
+                    <label class="form-check-label" for="switch2">Autogyro Camera</label>
+                </div>
+            </div>
+            <!-- Vertical line -->
+            <div class="vr"></div>
 
-                  <div class="vr"></div>
+            <!-- Switch + Button -->
+            <div class="d-flex align-items-center">
+                <div class="form-check form-switch me-3">
+                    <input class="form-check-input" type="checkbox" id="switch3">
+                    <label class="form-check-label" for="switch3">Telemetry</label>
+                </div>
+                <!-- <button class="btn btn-primary">Action</button> -->
+            </div>
+      
+            <div class="vr"></div>
 
-                  <button class="btn btn-primary" id="prime-btn">Prime</button>
-                  <button class="btn btn-primary" id="disengage-btn">Disengage</button>
+            <div class="d-flex align-items-center">
+                <button class="btn btn-success me-3" id="cal-btn">Calibrate</button>
+                <button class="btn btn-danger">Clear Data</button>
+            </div>
 
-                  <div class="vr"></div>
+            <div class="vr"></div>
 
-                  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <div class="btn-group" role="group">
-                      <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        GPS
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="#">Dropdown link</a>
-                        <a class="dropdown-item" href="#">Dropdown link</a>
-                      </div>
-                    </div>
-                    
-                    <button type="button" class="btn btn-secondary">Send Time</button>
-                  
-                  </div>
+            <button class="btn btn-primary" id="prime-btn">Prime</button>
+            <button class="btn btn-primary" id="disengage-btn">Disengage</button>
+
+            <div class="vr"></div>
+
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+              <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  GPS
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                  <a class="dropdown-item" href="#">Dropdown link</a>
+                  <a class="dropdown-item" href="#">Dropdown link</a>
+                </div>
+              </div>
+              
+              <button type="button" class="btn btn-secondary">Send Time</button>
+            
+            </div>
       
           </div>
       </div>

@@ -8,8 +8,8 @@ var ylabel_disp = false
 
 
 //map
-var map = L.map('map').setView([38, -78], 13);
-var wmap = L.map('wmap').setView([38, -78], 13);
+var map = L.map('map').setView([31.1, -86.1], 11);
+var wmap = L.map('wmap').setView([31.1, -86.1], 11);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -19,17 +19,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(wmap);
 
-var latlngs = [
-    [37.13, -78.60],
-    [37.15, -78.61],
-    [37.14, -78.62],
-    [37.145, -78.625],
-    [37.15, -78.685],
-    [37.16, -78.701],
-    [37.155, -78.705],
-    [37.158, -78.71],
-    [37.159, -78.709],
-];
+var latlngs = [];
 
 var polyline = L.polyline(latlngs, {color: 'red', weight: 8,}).addTo(map);
 var polyline = L.polyline(latlngs, {color: 'red', weight: 8,}).addTo(wmap);
@@ -57,7 +47,7 @@ function update() {
     }); 
 
     //map update
-    polyline.addLatLng([msgArr[21], msgArr[22]]);
+    polyline.addLatLng([msgArr[21].slice(0,2) + "." + msgArr[21].slice(2), msgArr[22].slice(0,3) + "." + msgArr[22].slice(3)]); //FIX
 
 }
 
@@ -415,12 +405,35 @@ function darkMode() {
     element.classList.toggle("dark-mode");
 } 
 
-document.getElementById('darkModeToggle').addEventListener('click',()=>{
-    if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
-        document.documentElement.setAttribute('data-bs-theme','light')
-    }
-    else {
-        document.documentElement.setAttribute('data-bs-theme','dark')
-    }
-})
+// document.getElementById('darkModeToggle').addEventListener('click',()=>{
+//     if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
+//         document.documentElement.setAttribute('data-bs-theme','light')
+//     }
+//     else {
+//         document.documentElement.setAttribute('data-bs-theme','dark')
+//     }
+// })
 
+document.addEventListener("DOMContentLoaded", () => {
+    function displayFile() {
+        const fileInput = document.getElementById('fileInput');
+        const output = document.getElementById('log-sim');  // Use the correct ID
+
+        if (fileInput && output && fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+
+            if (file.type === "text/plain") {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Replace newlines with <br> for proper line breaks in HTML
+                    output.innerHTML = e.target.result.replace(/\n/g, '<br>');
+                };
+                reader.readAsText(file);
+            } else {
+                output.innerHTML = "Please select a text file.";
+            }
+        }
+    }
+
+    window.displayFile = displayFile;  // Make it globally accessible
+});

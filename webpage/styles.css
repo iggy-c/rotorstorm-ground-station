@@ -125,6 +125,24 @@ body {
     padding: 10px;
 }
 
+.centered{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 20%;
+    left: 30%; 
+}
+
+.centered-simp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 30%;
+    left: 30%; 
+}
+
 .vr {
     width: 2px;
     background-color: #ccc;
@@ -133,4 +151,30 @@ body {
 
 .form-check {
     margin: 0px !important;
+}
+
+.button-container {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+#log-sim { 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    height: 840px; 
+    width: 50%;
+    overflow-y: scroll; 
+    font-size: large;
+}
+
+.last-command{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 60%;
+    left: 30%; 
+    font-size: large;
 }
