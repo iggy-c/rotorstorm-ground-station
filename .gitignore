@@ -1,3 +1,4 @@
 target/
 ground-station/target/
 .vscode/
+__pycache__/
