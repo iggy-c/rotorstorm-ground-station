@@ -2,3 +2,4 @@ target/
 ground-station/target/
 .vscode/
 __pycache__/
+telemetry-csv/

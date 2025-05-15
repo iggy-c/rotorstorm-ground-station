@@ -6,13 +6,14 @@
   }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Futura, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     /* height: 100vh; */
     overflow: hidden;
+    font-size: 14pt;
 }
 
 /* Sidebar styles */
@@ -82,17 +83,7 @@ body {
     background-color: #a5a5a5;
     padding: 5px;
  } */
- #footer {
-    /* width: 100%; */
-    width: calc(100% - 288px);
-    position: fixed;
-    bottom: 0;
-    height: 60px;
-    background-color: #a5a5a5;
-    /* padding: 10px 20px; */
-    padding: 5px;
-    /* border-top: 2px solid #ddd; */
-}
+
 
  .btn:focus,.btn:active {
     outline: none !important;
@@ -160,7 +151,7 @@ body {
     align-items: center;
 }
 
-#log-sim { 
+z#log-sim { 
     border: 1px solid #ccc; 
     padding: 10px; 
     height: 840px; 
@@ -178,3 +169,16 @@ body {
     left: 30%; 
     font-size: large;
 }
+
+.Main-UI-Container {
+    position: fixed;
+    z-index: 9999;
+    background-color: #efefef;
+    top: 0;
+    left: 0;
+    height: 50vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

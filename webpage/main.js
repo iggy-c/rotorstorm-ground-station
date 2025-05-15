@@ -111,7 +111,7 @@ document.getElementById('prime-btn').addEventListener('click', () => {
 document.getElementById('disengage-btn').addEventListener('click', () => {
     if (socket && socket.readyState === WebSocket.OPEN) {
         socket.send("CMD,3194,MEC,RELEASE,ON");
-        logMessage(`Sent command: CMD,3194,MEC,RELEASE,ON`);
+        logMessage(`Sent command: CMD,3194,MEC,RELEASE,ON`); //todo
     } else {
         logMessage('WebSocket is not connected');
     }
@@ -124,6 +124,15 @@ document.getElementById('cal-btn').addEventListener('click', () => {
     } else {
         logMessage('WebSocket is not connected');
     }
+});
+
+document.getElementById("switch3").addEventListener("change", function() {
+        if (this.checked) {
+            socket.send("CMD,3194,CX,ON");
+            // todo
+        } else {
+            socket.send("CMD,3194,CX,OFF");
+        }
 });
 
 // Charts
@@ -371,7 +380,7 @@ const chart_data = []
 // Function to update the chart with new data
 function updateChart() {
     // prevent undefined access
-    if (msgArr.length >= 9) {
+    if (msgArr.length >= 9 && msgArr[0] == "3194") {
         // Add new x-axis label (based on the length of the labels array)
         chartlst.forEach((chart, index) => {
             chart.data.labels.push(chart.data.labels.length); // Increment x-axis labels
