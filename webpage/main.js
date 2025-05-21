@@ -6,7 +6,6 @@ var radius_width = 0
 var xlabel_disp = false
 var ylabel_disp = false
 
-
 //map
 var map = L.map('map').setView([31.1, -86.1], 11);
 var wmap = L.map('wmap').setView([31.1, -86.1], 11);
@@ -47,10 +46,10 @@ function update() {
     }); 
 
     //map update
-    polyline.addLatLng([msgArr[21].slice(0,2) + "." + msgArr[21].slice(2), msgArr[22].slice(0,3) + "." + msgArr[22].slice(3)]); //FIX
+    // polyline.addLatLng([msgArr[21].slice(0,2) + "." + msgArr[21].slice(2), msgArr[22].slice(0,3) + "." + msgArr[22].slice(3)]); //FIX
+    polyline.addLatLng([msgArr[21], msgArr[22]]);
 
 }
-
 
 // Connect to WebSocket
 document.getElementById('connect-btn').addEventListener('click', () => {
@@ -135,6 +134,14 @@ document.getElementById("switch3").addEventListener("change", function() {
         }
 });
 
+document.getElementById('clr-btn').addEventListener('click', () => {
+    var chart_full_lst = [chart_a, chart_acc, chart_m, chart_v, chart_t]
+    // removeData(chart_v)
+    chart_full_lst.forEach((item) => {
+        removeData(item);
+    });
+});
+
 // Charts
 const ctx_v = document.getElementById('Voltage').getContext('2d');
 const chart_v = new Chart(ctx_v, {
@@ -169,40 +176,6 @@ const chart_v = new Chart(ctx_v, {
         }
     }
 });
-
-// const ctx_p = document.getElementById('Pressure').getContext('2d');
-// const chart_p = new Chart(ctx_p, {
-//     type: 'line',
-//     data: {
-//         labels: [], // X-axis labels (e.g., 0, 1, 2, ...)
-//         datasets: [{
-//             label: 'Presssure (kPa)',
-//             data: [], // Y-axis data
-//             borderColor: 'rgb(107, 107, 189)',
-//             backgroundColor: 'rgba(107, 107, 189, 1)',
-//             borderWidth: border_width
-//         }]
-//     },
-//     options: {
-//         responsive: true,
-//         maintainAspectRatio: false,
-//         animation: false,
-//         elements: {
-//             point:{
-//                 radius: radius_width
-//             }
-//         },
-//         scales: {
-//             x: {
-//                 title: { display: xlabel_disp, text: 'Time' }
-//             },
-//             y: {
-//                 title: { display: ylabel_disp, text: 'Pressure' },
-//                 beginAtZero: true
-//             }
-//         }
-//     }
-// });
 
 const ctx_a = document.getElementById('Altitude').getContext('2d');
 const chart_a = new Chart(ctx_a, {
@@ -409,19 +382,14 @@ function updateChart() {
     }
 }
 
-function darkMode() {
-    var element = document.body;
-    element.classList.toggle("dark-mode");
-} 
+function removeData(chart) {
+    chart.data.labels = [];
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data = [];
+    });
+    chart.update();
+}
 
-// document.getElementById('darkModeToggle').addEventListener('click',()=>{
-//     if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
-//         document.documentElement.setAttribute('data-bs-theme','light')
-//     }
-//     else {
-//         document.documentElement.setAttribute('data-bs-theme','dark')
-//     }
-// })
 
 document.addEventListener("DOMContentLoaded", () => {
     function displayFile() {
@@ -446,3 +414,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.displayFile = displayFile;  // Make it globally accessible
 });
+

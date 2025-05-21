@@ -75,14 +75,14 @@ body {
 
 }
 
-/* #footer {
-    position:absolute;
+#footer {
+    position:fixed;
+    width: calc(100% - 288px);
     bottom:0;
-    width:100%;
-    height:60px;
+    height:50px;
     background-color: #a5a5a5;
     padding: 5px;
- } */
+ }
 
 
  .btn:focus,.btn:active {
@@ -181,4 +181,4 @@ z#log-sim {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}

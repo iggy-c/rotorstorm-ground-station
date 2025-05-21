@@ -64,25 +64,24 @@
           <div id="element3" data-label="3">PACKET COUNT: <span class="dynamic"></span></div>
           <div id="element4" data-label="4">MODE: <span class="dynamic"></span></div>
           <div id="element5" data-label="5">STATE: <span class="dynamic"></span></div>
-          <!-- <div id="element6" data-label="6">ALTITUDE: <span class="dynamic">m</span></div> -->
           <div id="element6" data-label="6">ALTITUDE: <span class="dynamic"></span> m</div>
-          <div id="element7" data-label="7">TEMPERATURE: <span class="dynamic"></span></div>
-          <div id="element8" data-label="8">PRESSURE: <span class="dynamic"></span></div>
-          <div id="element9" data-label="9">VOLTAGE: <span class="dynamic"></span></div>
-          <div id="element10" data-label="10">GYRO_R: <span class="dynamic"></span></div>
-          <div id="element11" data-label="11">GYRO_P: <span class="dynamic"></span></div>
-          <div id="element12" data-label="12">GYRO_Y: <span class="dynamic"></span></div>
-          <div id="element13" data-label="13" style="display: none;">ACCEL_R: <span class="dynamic"></span></div>
-          <div id="element14" data-label="14" style="display: none;">ACCEL_P: <span class="dynamic"></span></div>
-          <div id="element15" data-label="15" style="display: none;">ACCEL_Y: <span class="dynamic"></span></div>
-          <div id="element16" data-label="16" style="display: none;">MAG_R: <span class="dynamic"></span></div>
-          <div id="element17" data-label="17" style="display: none;">MAG_P: <span class="dynamic"></span></div>
-          <div id="element18" data-label="18" style="display: none;">MAG_Y: <span class="dynamic"></span></div>
-          <div id="element19" data-label="19">ROTATION RATE: <span class="dynamic"></span></div>
+          <div id="element7" data-label="7">TEMPERATURE: <span class="dynamic"></span> °C</div>
+          <div id="element8" data-label="8">PRESSURE: <span class="dynamic"></span> kPa</div>
+          <div id="element9" data-label="9">VOLTAGE: <span class="dynamic"></span> V</div>
+          <div id="element10" data-label="10">GYRO_R: <span class="dynamic"></span> °/s</div>
+          <div id="element11" data-label="11">GYRO_P: <span class="dynamic"></span> °/s</div>
+          <div id="element12" data-label="12">GYRO_Y: <span class="dynamic"></span> °/s</div>
+          <div id="element13" data-label="13" style="display: none;">ACCEL_R: <span class="dynamic"></span> °/s</div>
+          <div id="element14" data-label="14" style="display: none;">ACCEL_P: <span class="dynamic"></span> °/s</div>
+          <div id="element15" data-label="15" style="display: none;">ACCEL_Y: <span class="dynamic"></span> °/s</div>
+          <div id="element16" data-label="16" style="display: none;">MAG_R: <span class="dynamic"></span> G</div>
+          <div id="element17" data-label="17" style="display: none;">MAG_P: <span class="dynamic"></span> G</div>
+          <div id="element18" data-label="18" style="display: none;">MAG_Y: <span class="dynamic"></span> G</div>
+          <div id="element19" data-label="19">ROTATION RATE: <span class="dynamic"></span> °/s</div>
           <div id="element20" data-label="20">GPS TIME: <span class="dynamic"></span></div>
-          <div id="element21" data-label="21">GPS ALTITUDE: <span class="dynamic"></span></div>
-          <div id="element22" data-label="22">GPS LATITUDE: <span class="dynamic"></span></div>
-          <div id="element23" data-label="23">GPS LONGITUDE: <span class="dynamic"></span></div>
+          <div id="element21" data-label="21">GPS ALTITUDE: <span class="dynamic"></span> m</div>
+          <div id="element22" data-label="22">GPS LATITUDE: <span class="dynamic"></span> N</div>
+          <div id="element23" data-label="23">GPS LONGITUDE: <span class="dynamic"></span> W</div>
           <div id="element24" data-label="24">GPS SATS: <span class="dynamic"></span></div>
           <div id="element25" data-label="25">ECHO: <span class="dynamic"></span></div>
           <div id="element27" data-label="27">CAM STATUS: <span class="dynamic"></span></div>
@@ -194,9 +193,9 @@
             <pre id="fileDisplayArea"></pre>
           </div>
         </div>
-        <div class="d-flex align-items-center justify-content-center gap-3" id="footer">
+        <footer id="footer">
           <div class="button-grid">
-            <div class="vr"></div>
+            <!-- <div class="vr"></div> -->
             <!-- Two stacked switches -->
             <!-- <div class="j d-flex flex-column justify-content-between">
               <div class="form-check form-switch mb-2">
@@ -219,29 +218,38 @@
               </div>
               <!-- <button class="btn btn-primary">Action</button> -->
             </div>
-
+            
             <div class="vr"></div>
+  
+              <!-- <button class="btn btn-warning" id="fli-btn">FLIGHT</button>
+              <button class="btn btn-warning" id="sim-btn">SIM</button>
 
-            <div class="dropdown dropup">
+
+            <div class="vr"></div> -->
+
+            <!-- <div class="dropdown dropup">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                Time Source
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">GPS</a></li>
-                <li><a class="dropdown-item" href="#">Computer</a></li>
-                <li><a class="dropdown-item" href="#">Custom</a></li>
-              </ul>
-            </div>
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Time Source
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">GPS</a></li>
+              <li><a class="dropdown-item" href="#">Computer</a></li>
+              <li><a class="dropdown-item" href="#">Custom</a></li>
+            </ul>
+          </div> -->
+          
+            <button class="btn btn-secondary" id="gps-btn">GPS Time</button>
+            <button class="btn btn-secondary" id="com-btn">COM Time</button>
 
 
-            <button type="button" class="btn btn-secondary">Send Time</button>
+            <!-- <button type="button" class="btn btn-secondary">Send Time</button> -->
 
             <div class="vr"></div>
 
             <div class="d-flex align-items-center">
               <button class="btn btn-success me-3" id="cal-btn">Calibrate</button>
-              <button class="btn btn-danger">Clear Data</button>
+              <button class="btn btn-danger" id="clr-btn">Clear Data</button>
             </div>
 
             <div class="vr"></div>
@@ -249,10 +257,11 @@
             <button class="btn btn-primary" id="prime-btn">Prime</button>
             <button class="btn btn-primary" id="disengage-btn">Disengage</button>
             
+
             <div class="vr"></div>
             
           </div>
-        </div>
+        </footer>
       </div>
     </div>
   </div>

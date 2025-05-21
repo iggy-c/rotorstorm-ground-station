@@ -79,7 +79,7 @@ async def serial_task(websocket):
     try:
         # Create serial connection
         transport, protocol = await serial_asyncio.create_serial_connection(
-            loop, lambda: OutputProtocol(websocket), 'COM7', baudrate=9600
+            loop, lambda: OutputProtocol(websocket), 'COM19', baudrate=9600
         )
 
         # Listen for messages from the client
