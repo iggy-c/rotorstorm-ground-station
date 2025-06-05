@@ -429,7 +429,7 @@ const chart_data = []
 // Function to update the chart with new data
 function updateChart() {
     // prevent undefined access
-    if (msgArr.length >= 9 && msgArr[0] == "3194") {
+    if (msgArr.length >= 9 && msgArr[0].toString().includes("3194")) {
         // Add new x-axis label (based on the length of the labels array)
         chartlst.forEach((chart, index) => {
             chart.data.labels.push(chart.data.labels.length); // Increment x-axis labels
