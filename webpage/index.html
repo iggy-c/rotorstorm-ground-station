@@ -47,6 +47,10 @@
   <script src="bootstrap-offline\js\popper.min.js"></script>
   <script src="bootstrap-offline\js\bootstrap.min.js"></script>
 
+  <script src="https://unpkg.com/sql.js@0.3.2/js/sql.js"></script>
+  <!-- <script src="https://unpkg.com/leaflet.tilelayer.mbtiles@latest/Leaflet.TileLayer.MBTiles.js"></script> -->
+
+
 
   <link rel="stylesheet" href="leaflet-offline\leaflet.css" />
   <script src="leaflet-offline\leaflet.js"></script>
@@ -111,9 +115,9 @@
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" href="#websocket">Websocket</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" href="#settings">Settings</a>
-          </li>
+          </li> -->
         </ul>
 
         <!-- Tab panes content-->
@@ -159,12 +163,13 @@
             </div>
             <div class="centered-simp">
               <div class="button-container">
-                <button class="btn btn-success" id="none-btn">Enable</button>
-                <button class="btn btn-success" id="none-btn">Activate</button>
-                <button class="btn btn-danger" id="none-btn">Disable</button>
+                <button class="btn btn-success" id="sim-enable-btn">Enable</button>
+                <button class="btn btn-success" id="sim-activate-btn">Activate</button>
+                <button class="btn btn-danger" id="sim-disable-btn">Disable</button>
               </div>
             </div>
-            <div class="last-command">Last command sent: <br>CMD,3194,SIMP,101325</div>
+            <!-- <div class="last-command">Last command sent: <br>CMD,3194,SIMP,101325</div> -->
+            <div id="last-command" data-label="last-command"><span class="dynamic"></span></div>
             <div id="log-sim" style="float:right;"></div>
           </div>
 
@@ -181,17 +186,12 @@
             </div>
           </div>
 
-          <div class="tab-pane container fade" id="settings">
-            <!-- <div class="form-check form-switch">
+          <!-- <div class="tab-pane container fade" id="settings">
+            <div class="form-check form-switch">
               <input class="form-check-input" type="checkbox" role="switch" id="darkModeToggle"></input>
               <label class="form-check-label" for="flexSwitchCheckDefault">Dark Mode</label>
-            </div> -->
-            <div>
-              Select a text file:
-              <input type="file" id="fileInput">
             </div>
-            <pre id="fileDisplayArea"></pre>
-          </div>
+          </div> -->
         </div>
         <footer id="footer">
           <div class="button-grid">

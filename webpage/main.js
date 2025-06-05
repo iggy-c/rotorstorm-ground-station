@@ -6,17 +6,32 @@ var radius_width = 0
 var xlabel_disp = false
 var ylabel_disp = false
 
+let csvRows = [];  // Will store all CSV rows as strings
+let csvIndex = 0;  // Track the current row
+let csvInterval = null;  // Interval timer
+
 //map
-var map = L.map('map').setView([31.1, -86.1], 11);
-var wmap = L.map('wmap').setView([31.1, -86.1], 11);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+var map = L.map('map').setView([37.3854661, -79.0655761], 14);
+var wmap = L.map('wmap').setView([37.3854661, -79.0655761], 14);
+// L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//     maxZoom: 19,
+//     // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+// }).addTo(map);
+// L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//     maxZoom: 19,
+//     // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+// }).addTo(wmap);
+// L.tileLayer.mbTiles('webpage/osm-2020-02-10-v3.11_us_virginia.mbtiles').addTo(map);
+// L.tileLayer.mbTiles('webpage/osm-2020-02-10-v3.11_us_virginia.mbtiles').addTo(wmap);
+L.tileLayer('http://localhost:3000/services/va/tiles/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors',
+  maxZoom: 14
 }).addTo(map);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+L.tileLayer('http://localhost:3000/services/va/tiles/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors',
+  maxZoom: 14
 }).addTo(wmap);
+
 
 var latlngs = [];
 
@@ -86,7 +101,7 @@ document.getElementById('connect-btn').addEventListener('click', () => {
     });
 });
 
-// Send a message to the WebSocket server
+
 document.getElementById('send-btn').addEventListener('click', () => {
     const message = document.getElementById('message').value;
     if (socket && socket.readyState === WebSocket.OPEN) {
@@ -140,7 +155,68 @@ document.getElementById('clr-btn').addEventListener('click', () => {
     chart_full_lst.forEach((item) => {
         removeData(item);
     });
+    latlngs = [] //TODO
 });
+
+document.getElementById('sim-enable-btn').addEventListener('click', () => {
+    if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send("CMD,3194,SIM,ENABLE");
+        logMessage(`Sent command: CMD,3194,SIM,ENABLE`); //todo
+    } else {
+        logMessage('WebSocket is not connected');
+    }
+    displayFile();
+
+});
+
+document.getElementById('sim-activate-btn').addEventListener('click', () => {
+    
+    if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send("CMD,3194,SIM,ACTIVATE");
+        logMessage(`Sent command: CMD,3194,SIM,ACTIVATE`); //todo
+    } else {
+        logMessage('WebSocket is not connected');
+    }
+    
+    if (csvRows.length === 0) {
+        logMessage("No CSV data loaded.");
+        return;
+    }
+
+    if (csvInterval !== null) return; // Prevent multiple intervals
+
+    csvInterval = setInterval(() => {
+        if (csvIndex >= csvRows.length) {
+            clearInterval(csvInterval);
+            csvInterval = null;
+            return;
+        }
+
+        const currentRow = csvRows[csvIndex];
+        if (socket && socket.readyState === WebSocket.OPEN) {
+            socket.send(`CMD,3194,SIMP,${currentRow}`);
+            logMessage(`CMD,3194,SIMP,${currentRow}`);
+        }
+
+        csvIndex++;
+    }, 1000); // 1 second interval
+});
+
+document.getElementById('sim-disable-btn').addEventListener('click', () => {
+    
+    if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send("CMD,3194,SIM,DISABLE");
+        logMessage(`Sent command: CMD,3194,SIM,DISABLE`); //todo
+    } else {
+        logMessage('WebSocket is not connected');
+    }
+    
+    if (csvInterval !== null) {
+        clearInterval(csvInterval);
+        csvInterval = null;
+    }
+});
+
 
 // Charts
 const ctx_v = document.getElementById('Voltage').getContext('2d');
@@ -394,24 +470,26 @@ function removeData(chart) {
 document.addEventListener("DOMContentLoaded", () => {
     function displayFile() {
         const fileInput = document.getElementById('fileInput');
-        const output = document.getElementById('log-sim');  // Use the correct ID
+        const target = document.querySelector('#last-command .dynamic');
 
-        if (fileInput && output && fileInput.files.length > 0) {
+        if (fileInput && target && fileInput.files.length > 0) {
             const file = fileInput.files[0];
 
-            if (file.type === "text/plain") {
+            if (file.type === "text/csv" || file.name.endsWith('.csv')) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    // Replace newlines with <br> for proper line breaks in HTML
-                    output.innerHTML = e.target.result.replace(/\n/g, '<br>');
+                    const lines = e.target.result.split('\n').filter(line => line.trim().length > 0);
+                    csvRows = lines;
+                    csvIndex = 0;
+
+                    target.textContent = lines[0]?.trim() || "CSV is empty.";
                 };
                 reader.readAsText(file);
             } else {
-                output.innerHTML = "Please select a text file.";
+                target.textContent = "Please select a CSV file.";
             }
         }
     }
 
-    window.displayFile = displayFile;  // Make it globally accessible
+    window.displayFile = displayFile;
 });
-

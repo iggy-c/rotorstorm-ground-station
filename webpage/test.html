@@ -1,217 +1,43 @@
-<!-- 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::*:##:@@%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::+*##:@@@::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::*:##@@@:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::-##:@@@:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::#:@@@::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::##:@@@::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::@@@:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::@@@::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::@@@::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::::@@@@@@@@@@@@=:=@@@@@@@@@@@::@@@@@@@@@@@::@@@@@@@@@@@::@@@@@@@@@@@@:::::::::::::::::::::::::::::::::
-::::::::@@@::::::@@@=:@@@::::::@@@::::::@@@::::::@@@:::::=@@@:@@@::::::@@@:::::::::::::::::::::::::::::::::
-::::::::@@@::@@@@@@@=:@@@::::::@@@::::::@@@::::::@@@:::::=@@@:@@@::@@@@@@@:::::::::::::::::::::::::::::::::
-::::::::@@@:::@@@@::::@@@::::::@@@::::::@@@::::::@@@:::::=@@@:@@@:::@@@+:::::::::::::::::::::::::::::::::::
-::::::::@@@:::::@@@:::@@@@::::@@@@::::::@@@::::::@@@:::::@@@@:@@@::::@@@@::::::::::::::::::::::::::::::::::
-::::::::@@@::::::@@@:@@@@@@@@@@@@:::::::@@@:::::::@@@@@@@@@:::@@@::::::@@@:::::::::::::::::::::::::::::::::
-:::::::::::::::::::::@@@::::::::@@@@@@@@@@@::@@@@@@@@@@@:::@@@@@@@@@@::@@@@@@@@@@@@::@:::::::::::@:::::::::
-::::::::::::::::::::@@@::::::::@@@:::::::::::::::@@@::::::@@@:::::@@@@:@@@::::::@@@::@@@@:::::@@@@:::::::::
-::::::::::::::::::::@@@::::::::@@@@@@@-::::::::::@@@::::::@@@:::::%@@@:@@@:@@@@@@@@::@@@@@@@@@@@@@:::::::::
-:::::::::::::::::::@@@:##:::::::-@@@@@@@@@@::::::@@@::::::@@@:::::%@@@:@@@::%@@@:::::@@@::@@@::@@@:::::::::
-::::::::::::::::::@@@:##::::::::::::::::@@@::::::@@@::::::@@@:::::%@@@:@@@::::@@@::::@@@:::::::@@@:::::::::
-::::::::::::::::::@@@:#:*=:::::@@@@@@@@@@@:::::::@@@::::::@@@@@@@@@@@::@@@:::::@@@@::@@@:::::::@@@:::::::::
-:::::::::::::::::@@@:##:*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::@@@*#:*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::::::::::::::::##+*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
- -->
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  </meta>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </meta>
-  <title>🔥GCS🔥</title>
-  <link rel="icon" type="image/x-icon" href="assets\rotorstorm_square.png">
-  </link>
-  <link rel="stylesheet" href="bootstrap-offline\css\bootstrap-5.0.2-dist\css\bootstrap.css">
-  <link rel="stylesheet" href="styles.css">
-  </link>
-
-  <script src="chartsjs-offline/chart.js"></script>
-
-  <script src="bootstrap-offline\js\popper.min.js"></script>
-  <script src="bootstrap-offline\js\bootstrap.min.js"></script>
-
-
-  <link rel="stylesheet" href="leaflet-offline\leaflet.css" />
-  <script src="leaflet-offline\leaflet.js"></script>
+  <meta charset="utf-8" />
+  <title>Vector Tiles with Martin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+  </style>
 </head>
-
 <body>
-  <div class="container-fluid min-vh-100 d-flex flex-column">
-    <div class="row flex-grow-1">
-      <div class="col-md-2 border">
-        <img src="assets\rotorstorm-logo.png" class="img-fluid" style="padding-top: 10px;"></img>
-
-        <div class="d-flex flex-column flex-grow-1 justify-content-between py-3">
-          <div id="element1" data-label="1">TEAM ID: <span class="dynamic"></span></div>
-          <div id="element2" data-label="2">MISSION TIME: <span class="dynamic"></span></div>
-          <div id="element3" data-label="3">PACKET COUNT: <span class="dynamic"></span></div>
-          <div id="element4" data-label="4">MODE: <span class="dynamic"></span></div>
-          <div id="element5" data-label="5">STATE: <span class="dynamic"></span></div>
-          <!-- <div id="element6" data-label="6">ALTITUDE: <span class="dynamic">m</span></div> -->
-          <div id="element6" data-label="6">ALTITUDE: <span class="dynamic"></span> m</div>
-          <div id="element7" data-label="7">TEMPERATURE: <span class="dynamic"></span></div>
-          <div id="element8" data-label="8">PRESSURE: <span class="dynamic"></span></div>
-          <div id="element9" data-label="9">VOLTAGE: <span class="dynamic"></span></div>
-          <div id="element10" data-label="10">GYRO_R: <span class="dynamic"></span></div>
-          <div id="element11" data-label="11">GYRO_P: <span class="dynamic"></span></div>
-          <div id="element12" data-label="12">GYRO_Y: <span class="dynamic"></span></div>
-          <div id="element13" data-label="13" style="display: none;">ACCEL_R: <span class="dynamic"></span></div>
-          <div id="element14" data-label="14" style="display: none;">ACCEL_P: <span class="dynamic"></span></div>
-          <div id="element15" data-label="15" style="display: none;">ACCEL_Y: <span class="dynamic"></span></div>
-          <div id="element16" data-label="16" style="display: none;">MAG_R: <span class="dynamic"></span></div>
-          <div id="element17" data-label="17" style="display: none;">MAG_P: <span class="dynamic"></span></div>
-          <div id="element18" data-label="18" style="display: none;">MAG_Y: <span class="dynamic"></span></div>
-          <div id="element19" data-label="19">ROTATION RATE: <span class="dynamic"></span></div>
-          <div id="element20" data-label="20">GPS TIME: <span class="dynamic"></span></div>
-          <div id="element21" data-label="21">GPS ALTITUDE: <span class="dynamic"></span></div>
-          <div id="element22" data-label="22">GPS LATITUDE: <span class="dynamic"></span></div>
-          <div id="element23" data-label="23">GPS LONGITUDE: <span class="dynamic"></span></div>
-          <div id="element24" data-label="24">GPS SATS: <span class="dynamic"></span></div>
-          <div id="element25" data-label="25">ECHO: <span class="dynamic"></span></div>
-          <div id="element27" data-label="27">CAM STATUS: <span class="dynamic"></span></div>
-          <!-- <div id="element28" data-label="28">DOWNCAM_STATUS: <span class="dynamic"></span></div> -->
-          <!-- <div id="element29" data-label="29">CAM_ROTATION: <span class="dynamic"></span></div> -->
-          <div id="element30" data-label="30">FLIGHT TIME: <span class="dynamic"></span></div>
-          <!-- <div id="element31" data-label="31">CURRENT: <span class="dynamic"></span></div> -->
-          <div id="packet_received" data-label="packet_received">PACKETS RECEIVED: <span class="dynamic"></span></div>
-        </div>
-
-      </div>
-
-      <!-- Main Body -->
-
-      <!-- Tabs on top -->
-      <div class="col-md-10">
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" data-bs-toggle="tab" href="#graphs">Graphs</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#map">Map</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#simulation">Simulation</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#websocket">Websocket</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#settings">Settings</a>
-          </li>
-        </ul>
-
-        <!-- Tab panes content-->
-        <div class="tab-content">
-
-          <div class="tab-pane container active" id="graphs">
-            <div class="graph-grid">
-              <div>
-                <canvas id="Voltage"></canvas>
-              </div>
-              <div>
-                <canvas id="Temperature"></canvas>
-              </div>
-              <div>
-                <canvas id="Altitude"></canvas>
-              </div>
-              <div>
-                <canvas id="Magnetism"></canvas>
-              </div>
-              <div>
-                <canvas id="Acceleration"></canvas>
-              </div>
-              <div id="wmap"></div>
-              <!-- <div>
-                <canvas id="Pressure"></canvas>
-              </div> -->
-            </div>
-          </div>
-
-          <div class="tab-pane container fade" id="map">
-            <div id="map"></div>
-          </div>
-
-          <div class="tab-pane container fade" id="simulation" display: flex;>
-            <div class="centered">
-              <!-- <form method="post" enctype="multipart/form-data">
-                <label for="file"></label>
-                <input id="file" name="file" type="file">
-                <button class="btn btn-primary">Upload</button> 
-              </form> -->
-              <!-- <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Open File</button> -->
-              <input type="file" id="fileInput" accept=".txt" onchange="displayFile()">
-            </div>
-            <div class="centered-simp">
-              <div class="button-container">
-                <button class="btn btn-success" id="none-btn">Enable</button>
-                <button class="btn btn-success" id="none-btn">Activate</button>
-                <button class="btn btn-danger" id="none-btn">Disable</button>
-              </div>
-            </div>
-            <div class="last-command">Last command sent: <br>CMD,3194,SIMP,101325</div>
-            <div id="log-sim" style="float:right;"></div>
-          </div>
-
-          <div class="tab-pane container fade" id="websocket">
-            <div>
-              <label for="ws-url">WebSocket URL:</label>
-              <input id="ws-url" type="text" value="ws://localhost:8000">
-              <button id="connect-btn">Connect</button>
-            </div>
-            <div id="log"></div>
-            <div>
-              <input id="message" type="text" placeholder="Message to send">
-              <button id="send-btn" disabled>Send</button>
-            </div>
-          </div>
-
-          <div class="tab-pane container fade" id="settings">
-            <!-- <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" id="darkModeToggle"></input>
-              <label class="form-check-label" for="flexSwitchCheckDefault">Dark Mode</label>
-            </div> -->
-            <div>
-              Select a text file:
-              <input type="file" id="fileInput">
-            </div>
-            <pre id="fileDisplayArea"></pre>
-          </div>
-        </div>
-        <footer class="d-flex justify-content-between align-items-center px-4 py-3" style="background-color: #f8f9fa;">
-    <div class="d-flex align-items-center">
-        <button class="btn btn-primary">Button 1</button>
-        <div class="vr mx-3"></div>
-    </div>
-    <div class="d-flex align-items-center">
-        <button class="btn btn-primary">Button 2</button>
-        <div class="vr mx-3"></div>
-    </div>
-    <div class="d-flex align-items-center">
-        <button class="btn btn-primary">Button 3</button>
-    </div>
-</footer>
-      </div>
-    </div>
-  </div>
-
-  <script src="main.js"></script>
+  <div id="map"></div>
+  <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
+  <script>
+    const map = new maplibregl.Map({
+      container: 'map',
+      style: {
+        version: 8,
+        sources: {
+          va: {
+            type: 'vector',
+            tiles: ['http://localhost:3000/tiles/va/{z}/{x}/{y}.pbf'],
+            maxzoom: 14
+          }
+        },
+        layers: [
+          {
+            id: 'va-fill',
+            type: 'line',
+            source: 'va',
+            'source-layer': 'landuse',
+            paint: { 'line-color': '#555', 'line-width': 1 }
+          }
+        ]
+      },
+      center: [-78.5, 37.5],
+      zoom: 6
+    });
+  </script>
 </body>
-
 </html>

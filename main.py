@@ -7,6 +7,41 @@ from websockets.asyncio.server import serve
 
 filename = f"telemetry-csv\\telemetry_{datetime.datetime.now().strftime('%Y-%m-%d__%H-%M-%S')}.csv"
 
+def xbee_format(data: str) -> bytes:
+    # Frame specifics
+    frame_type = 0x10  # Transmit Request
+    frame_id = 0x01    # Frame ID (non-zero to get ACK)
+    dest_addr = bytes.fromhex("0013A2004250AD63")
+    reserved = b'\xFF\xFE'  # 16-bit address (not used)
+    broadcast_radius = 0x00
+    options = 0x00
+
+    # Payload
+    rf_data = data.encode('utf-8')
+
+    # Frame data (without start delimiter and length)
+    frame_data = (
+        bytes([frame_type]) +
+        bytes([frame_id]) +
+        dest_addr +
+        reserved +
+        bytes([broadcast_radius]) +
+        bytes([options]) +
+        rf_data
+    )
+
+    # Length
+    length = len(frame_data)
+    length_bytes = length.to_bytes(2, 'big')
+
+    # Checksum: 0xFF - (sum of frame_data & 0xFF)
+    checksum = 0xFF - (sum(frame_data) & 0xFF)
+
+    # Final frame
+    frame = b'\x7E' + length_bytes + frame_data + bytes([checksum])
+    return frame
+
+
 class OutputProtocol(asyncio.Protocol):
     def __init__(self, websocket):
         self.websocket = websocket
@@ -24,10 +59,6 @@ class OutputProtocol(asyncio.Protocol):
 
     def data_received(self, data):
         self.buffer += data
-        # print(self.buffer)
-        # for b in self.buffer:
-        #     print(b)
-        # print(hex(self.buffer))
 
         if b'~' in self.buffer:
             self.start_index = self.buffer.index(b'~')
@@ -42,18 +73,19 @@ class OutputProtocol(asyncio.Protocol):
                         self.payload += str(chr(self.buffer[self.start_index+i]))
                         self.packet_type = self.buffer[self.start_index + 3]
 
-                    if self.packet_type == 144:
+                    if self.packet_type == 144 and len(self.payload) > 5:
+                        print("payload is ", self.payload)
                         self.packets_received += 1 
                         print("packet count:", self.packets_received)
                         self.payload += ","+ str(self.packets_received)
 
                     # Send payload over WebSocket
-                    if self.websocket:
+                    if self.websocket and len(self.payload) > 1:
                         print("Payload received:", self.payload)
                         with open(filename, mode='a', newline='') as file:
                             writer = csv.writer(file)
-                            writer.writerow(self.payload.split(","))
-                            # print(type(self.payload.split(",")))
+                            # if len(self.payload) > 10:
+                            writer.writerow(self.payload.split(",") + [","] + [datetime.datetime.now().strftime('%H:%M:%S.%f')[:-3]])
                         print(type(self.payload))
                         print(self.payload.split(","))
                         self.payload = ",".join(self.payload.split(",")[:-4]) + "," + ",".join(self.payload.split(",")[-3:])
@@ -97,6 +129,8 @@ async def serial_task(websocket):
                 transport.write(b"\x7E\x00\x11\x10\x01\x00\x13\xA2\x00\x42\x50\xAD\x63\xFF\xFE\x00\x00\x63\x6F\x6E\x5A")
             elif message == "CMD,3194,CX,OFF":
                 transport.write(b"\x7E\x00\x11\x10\x01\x00\x13\xA2\x00\x42\x50\xAD\x63\xFF\xFE\x00\x00\x63\x6F\x66\x62")
+            elif "CMD,3194,SIM" in message:
+                transport.write(xbee_format(message))
         # Keep the connection open
         await asyncio.Future()  
     except Exception as e:
@@ -111,4 +145,3 @@ async def main():
 
 # Start event loop
 asyncio.run(main())
-
