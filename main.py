@@ -1,13 +1,28 @@
-import sys
+# import sys
 import csv
 import datetime
 import asyncio
 import serial_asyncio
+import serial
 from websockets.asyncio.server import serve
 
 api_mode = False
 
 filename = f"telemetry-csv\\telemetry_{datetime.datetime.now().strftime('%Y-%m-%d__%H-%M-%S')}.csv"
+
+def last_serial_port():
+    ports = ['COM%s' % (i + 1) for i in range(256)]
+
+    result = []
+    for port in ports:
+        try:
+            s = serial.Serial(port)
+            s.close()
+            result.append(port)
+        except (OSError, serial.SerialException):
+            pass
+    return result[-1]
+
 
 def xbee_format(data: str) -> bytes:
     # Frame specifics
@@ -104,7 +119,7 @@ class OutputProtocol(asyncio.Protocol):
         else:
             try:
                 self.payload = self.buffer.decode("utf-8")
-                if "]" in self.payload:
+                if "]" in self.payload and "[" in self.payload:
                     self.payload = self.payload[self.payload.index("[") + 1:self.payload.index("]")]
                     if self.websocket and len(self.payload) > 1:
                         print("Payload received:", self.payload)
@@ -132,7 +147,7 @@ async def serial_task(websocket):
     try:
         # Create serial connection
         transport, protocol = await serial_asyncio.create_serial_connection(
-            loop, lambda: OutputProtocol(websocket), 'COM19', baudrate=9600
+            loop, lambda: OutputProtocol(websocket), last_serial_port(), baudrate=9600
         )
 
         # Listen for messages from the client
@@ -151,10 +166,15 @@ async def serial_task(websocket):
                     transport.write(b"\x7E\x00\x11\x10\x01\x00\x13\xA2\x00\x42\x50\xAD\x63\xFF\xFE\x00\x00\x63\x6F\x6E\x5A")
                 elif message == "CMD,3194,CX,OFF":
                     transport.write(b"\x7E\x00\x11\x10\x01\x00\x13\xA2\x00\x42\x50\xAD\x63\xFF\xFE\x00\x00\x63\x6F\x66\x62")
+                # elif message == "CMD,3194,ST,GPS":
+
                 elif "CMD,3194,SIM" in message:
                     transport.write(xbee_format(message))
             else:
-                transport.write(("{" + message + "}").encode("utf-8"))
+                if message == "CMD,3194,ST,COM":
+                    transport.write(("{" + "CMD,3194,ST," + str(datetime.datetime.now(tz=datetime.timezone.utc).strftime('%H:%M:%S')) + "}").encode("utf-8"))
+                else:
+                    transport.write(("{" + message + "}").encode("utf-8"))
         # Keep the connection open
         await asyncio.Future()  
     except Exception as e:

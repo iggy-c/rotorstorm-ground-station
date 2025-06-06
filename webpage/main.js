@@ -158,6 +158,24 @@ document.getElementById('clr-btn').addEventListener('click', () => {
     latlngs = [] //TODO
 });
 
+document.getElementById('gps-btn').addEventListener('click', () => {
+    if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send("CMD,3194,ST,GPS");
+        logMessage(`Sent command: CMD,3194,ST,GPS`);
+    } else {
+        logMessage('WebSocket is not connected');
+    }
+});
+
+document.getElementById('com-btn').addEventListener('click', () => {
+    if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send("CMD,3194,ST,COM");
+        logMessage(`Sent command: CMD,3194,ST,COM`);
+    } else {
+        logMessage('WebSocket is not connected');
+    }
+});
+
 document.getElementById('sim-enable-btn').addEventListener('click', () => {
     if (socket && socket.readyState === WebSocket.OPEN) {
         socket.send("CMD,3194,SIM,ENABLE");
@@ -168,6 +186,7 @@ document.getElementById('sim-enable-btn').addEventListener('click', () => {
     displayFile();
 
 });
+
 
 document.getElementById('sim-activate-btn').addEventListener('click', () => {
     
@@ -379,21 +398,21 @@ const chart_acc = new Chart(ctx_acc, {
         labels: [],
         datasets: [
             {
-                label: 'Acceleration R (m/s²)',
+                label: 'Acceleration R (°/s²)',
                 data: [], // Y-axis data
                 borderColor: 'rgba(0, 255, 0, 1)',
                 backgroundColor: 'rgba(0, 255, 0, 1)',
                 borderWidth: border_width
             },
             {
-                label: 'Acceleration P (m/s²)',
+                label: 'Acceleration P (°/s²)',
                 data: [], // Y-axis data
                 borderColor: 'rgba(255, 0, 0, 1)',
                 backgroundColor: 'rgba(255, 0, 0, 1)',
                 borderWidth: border_width
             },
             {
-                label: 'Acceleration Y (m/s²)',
+                label: 'Acceleration Y (°/s²)',
                 data: [], // Y-axis data
                 borderColor: 'rgb(0, 0, 255)',
                 backgroundColor: 'rgba(0, 0, 255, 1)',

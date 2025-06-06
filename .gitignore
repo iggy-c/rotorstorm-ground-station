@@ -4,3 +4,4 @@ ground-station/target/
 __pycache__/
 telemetry-csv/
 webpage/osm-2020-02-10-v3.11_us_virginia.mbtiles
+serial_finder.py
