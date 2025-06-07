@@ -118,19 +118,42 @@ class OutputProtocol(asyncio.Protocol):
                     print("Error parsing data:", e)
         else:
             try:
+                # print(1)
                 self.payload = self.buffer.decode("utf-8")
+                # print(2)
+                print(self.payload)
                 if "]" in self.payload and "[" in self.payload:
-                    self.payload = self.payload[self.payload.index("[") + 1:self.payload.index("]")]
+                    # print(3)
+                    # if(self.payload.index("[") + 1 < self.payload.index("]")):
+                    
+                    self.payload = self.payload[self.payload.index("["):self.payload.index("]", self.payload.index("["))].replace("[","")
+                    # if(self.payload[0:2] != "[3"):
+                    #     self.payload = []
+                    
+                    # else(self.payload = self.payload[self.payload.index("[") + 1:self.payload.index("]")])
+                    # print(4)
+                    print(self.websocket)
+                    print(len(self.payload))
                     if self.websocket and len(self.payload) > 1:
                         print("Payload received:", self.payload)
                         with open(filename, mode='a', newline='') as file:
                             writer = csv.writer(file)
                             writer.writerow(self.payload.split(",") + [datetime.datetime.now().strftime('%H:%M:%S.%f')[:-3]])
+                        # print(5)
                         self.packets_received += 1
+                        # print(6)
                         self.payload += "," + str(self.packets_received)
+                        # print(7)
                         asyncio.create_task(self.websocket.send(self.payload))
+                        # print(8)
                         self.payload = ""
+                        # print(9)
                         self.buffer = b''
+                    else:
+                        self.payload = ""
+                        # print(9)
+                        self.buffer = b''
+                        
             except Exception as e:
                 print("Error parsing data:", e)
 
